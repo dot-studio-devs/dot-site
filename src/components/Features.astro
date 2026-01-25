@@ -1,0 +1,280 @@
+---
+import type { Translations } from "../i18n/translations";
+import { Code, Palette, Rocket, Shield } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+  lang: "es" | "en";
+}
+
+const { t, lang } = Astro.props;
+
+const title = lang === "es" ? "Por qué elegirnos" : "Why choose us";
+const subtitle =
+  lang === "es"
+    ? "Combinamos diseño, tecnología y estrategia para crear experiencias únicas"
+    : "We combine design, technology and strategy to create unique experiences";
+
+const features =
+  lang === "es"
+    ? [
+        {
+          icon: "code",
+          title: "Código limpio",
+          description:
+            "Desarrollamos con las mejores prácticas y tecnologías modernas para garantizar rendimiento y escalabilidad.",
+        },
+        {
+          icon: "palette",
+          title: "Diseño único",
+          description:
+            "Cada proyecto es diseñado desde cero, sin plantillas. Tu marca merece algo especial.",
+        },
+        {
+          icon: "rocket",
+          title: "Rendimiento",
+          description:
+            "Optimización extrema para tiempos de carga ultrarrápidos y mejor posicionamiento en buscadores.",
+        },
+        {
+          icon: "shield",
+          title: "Soporte continuo",
+          description:
+            "No te dejamos solo después del lanzamiento. Estamos contigo en cada paso del camino.",
+        },
+      ]
+    : [
+        {
+          icon: "code",
+          title: "Clean code",
+          description:
+            "We develop with best practices and modern technologies to ensure performance and scalability.",
+        },
+        {
+          icon: "palette",
+          title: "Unique design",
+          description:
+            "Each project is designed from scratch, no templates. Your brand deserves something special.",
+        },
+        {
+          icon: "rocket",
+          title: "Performance",
+          description:
+            "Extreme optimization for ultra-fast loading times and better search engine rankings.",
+        },
+        {
+          icon: "shield",
+          title: "Continuous support",
+          description:
+            "We don't leave you alone after launch. We're with you every step of the way.",
+        },
+      ];
+---
+
+<section class="features">
+  <div class="container">
+    <div class="features-layout">
+      <div class="features-header" data-animate>
+        <h2 class="section-title">{title}</h2>
+        <p class="section-subtitle">{subtitle}</p>
+      </div>
+
+      <div class="features-grid">
+        {
+          features.map((feature, index) => (
+            <div class="feature-card" data-animate data-delay={index * 120}>
+              <div class="feature-icon">
+                {feature.icon === "code" && (
+                  <Code size={26} strokeWidth={1.5} />
+                )}
+                {feature.icon === "palette" && (
+                  <Palette size={26} strokeWidth={1.5} />
+                )}
+                {feature.icon === "rocket" && (
+                  <Rocket size={26} strokeWidth={1.5} />
+                )}
+                {feature.icon === "shield" && (
+                  <Shield size={26} strokeWidth={1.5} />
+                )}
+              </div>
+              <div class="feature-content">
+                <h3 class="feature-title">{feature.title}</h3>
+                <p class="feature-description">{feature.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 7rem 2rem;
+    background: white;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .features-header {
+    position: sticky;
+    top: 120px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.7s ease;
+  }
+
+  .features-header.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    line-height: 1.7;
+  }
+
+  .features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #fafafa;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+  }
+
+  .feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feature-card:hover {
+    background: white;
+    border-color: var(--color-dot-green-300);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-purple-100),
+      var(--color-dot-purple-50)
+    );
+    border-radius: 14px;
+    color: var(--color-dot-purple-700);
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+    color: var(--color-dot-shadow);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .features-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .features-header {
+      position: static;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features {
+      padding: 5rem 1.5rem;
+    }
+
+    .feature-card {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll(".features [data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+</script>

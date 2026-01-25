@@ -1,0 +1,194 @@
+---
+import type { Translations } from "../i18n/translations";
+import { Monitor, Globe, ShoppingCart } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const services = [
+  {
+    icon: "landing",
+    title: t.services.landing.title,
+    description: t.services.landing.description,
+  },
+  {
+    icon: "web",
+    title: t.services.web.title,
+    description: t.services.web.description,
+  },
+  {
+    icon: "ecommerce",
+    title: t.services.ecommerce.title,
+    description: t.services.ecommerce.description,
+  },
+];
+---
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <h2 class="section-title">{t.services.title}</h2>
+      <p class="section-subtitle">{t.services.subtitle}</p>
+    </div>
+
+    <div class="services-grid">
+      {
+        services.map((service, index) => (
+          <article class="service-card" data-animate data-delay={index * 100}>
+            <div class="service-icon">
+              {service.icon === "landing" && (
+                <Monitor size={28} strokeWidth={1.5} />
+              )}
+              {service.icon === "web" && <Globe size={28} strokeWidth={1.5} />}
+              {service.icon === "ecommerce" && (
+                <ShoppingCart size={28} strokeWidth={1.5} />
+              )}
+            </div>
+            <h3 class="service-title">{service.title}</h3>
+            <p class="service-description">{service.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: 6rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .service-card {
+    padding: 2.5rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-dot-green-300);
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-dot-green-50);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    color: var(--color-dot-green-700);
+  }
+
+  .service-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-dot-shadow);
+  }
+
+  @media (max-width: 900px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services {
+      padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll("[data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+</script>

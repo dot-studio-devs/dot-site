@@ -1,0 +1,339 @@
+---
+import type { Translations } from "../i18n/translations";
+import {
+  Github,
+  Twitter,
+  Linkedin,
+  Instagram,
+  ArrowUpRight,
+} from "lucide-astro";
+
+interface Props {
+  t: Translations;
+  lang: "es" | "en";
+}
+
+const { t, lang } = Astro.props;
+const year = new Date().getFullYear();
+
+const footerLinks =
+  lang === "es"
+    ? {
+        company: {
+          title: "Empresa",
+          links: [
+            { label: "Sobre nosotros", href: "#" },
+            { label: "Servicios", href: "#services" },
+            { label: "Proyectos", href: "#projects" },
+            { label: "Contacto", href: "#contact" },
+          ],
+        },
+        services: {
+          title: "Servicios",
+          links: [
+            { label: "Landing Pages", href: "#services" },
+            { label: "Sitios Web", href: "#services" },
+            { label: "E-commerce", href: "#services" },
+            { label: "Mantenimiento", href: "#services" },
+          ],
+        },
+      }
+    : {
+        company: {
+          title: "Company",
+          links: [
+            { label: "About us", href: "#" },
+            { label: "Services", href: "#services" },
+            { label: "Projects", href: "#projects" },
+            { label: "Contact", href: "#contact" },
+          ],
+        },
+        services: {
+          title: "Services",
+          links: [
+            { label: "Landing Pages", href: "#services" },
+            { label: "Websites", href: "#services" },
+            { label: "E-commerce", href: "#services" },
+            { label: "Maintenance", href: "#services" },
+          ],
+        },
+      };
+
+const contactTitle = lang === "es" ? "Contacto" : "Contact";
+---
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href={lang === "es" ? "/" : "/en"} class="footer-logo">
+            <img src="/dot-logo-only.svg" alt="dot studio" />
+          </a>
+          <p class="footer-tagline">
+            {
+              lang === "es"
+                ? "Transformamos ideas en experiencias digitales que impulsan negocios."
+                : "We transform ideas into digital experiences that drive business."
+            }
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Twitter">
+              <Twitter size={18} strokeWidth={1.5} />
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <Linkedin size={18} strokeWidth={1.5} />
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <Instagram size={18} strokeWidth={1.5} />
+            </a>
+            <a href="#" class="social-link" aria-label="GitHub">
+              <Github size={18} strokeWidth={1.5} />
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">{footerLinks.company.title}</h4>
+          <ul class="footer-links-list">
+            {
+              footerLinks.company.links.map((link) => (
+                <li>
+                  <a href={link.href} class="footer-link">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">{footerLinks.services.title}</h4>
+          <ul class="footer-links-list">
+            {
+              footerLinks.services.links.map((link) => (
+                <li>
+                  <a href={link.href} class="footer-link">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-links-title">{contactTitle}</h4>
+          <ul class="footer-links-list">
+            <li>
+              <a
+                href="mailto:franespindola71@gmail.com"
+                class="footer-link email"
+              >
+                franespindola71@gmail.com
+                <ArrowUpRight size={14} strokeWidth={2} />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-content">
+        <p class="footer-copy">
+          {year} dot studio. {t.footer.rights}.
+        </p>
+        <div class="footer-legal">
+          <a href="#" data-open-privacy
+            >{lang === "es" ? "Privacidad" : "Privacy"}</a
+          >
+          <a href="#" data-open-terms>{lang === "es" ? "Términos" : "Terms"}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #0a0a0a;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-top {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .footer-brand {
+    max-width: 280px;
+  }
+
+  .footer-logo {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-logo img {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover {
+    background: var(--color-dot-green-500);
+    color: #1a1a1a;
+    transform: translateY(-2px);
+  }
+
+  .footer-links-group {
+  }
+
+  .footer-links-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-link {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .footer-link:hover {
+    color: var(--color-dot-green-500);
+  }
+
+  .footer-link.email {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 0;
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-legal a {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-legal a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .footer-brand {
+      grid-column: span 2;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .footer-top {
+      padding: 3rem 0;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      grid-column: span 1;
+    }
+
+    .footer-bottom-content {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .footer-legal {
+      gap: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,284 @@
+---
+import type { Translations } from "../i18n/translations";
+import { Mail, ArrowRight } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="contact-content" data-animate>
+        <h2 class="section-title">{t.contact.title}</h2>
+        <p class="section-subtitle">{t.contact.subtitle}</p>
+
+        <div class="contact-info">
+          <a href="mailto:franespindola71@gmail.com" class="info-item">
+            <Mail size={20} strokeWidth={1.5} />
+            <span>franespindola71@gmail.com</span>
+          </a>
+        </div>
+      </div>
+
+      <form
+        class="contact-form"
+        data-animate
+        data-delay="200"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <input
+          type="hidden"
+          name="access_key"
+          value="a3c5aa30-cff7-4969-8eb5-0af8d7746e7c"
+        />
+        <input
+          type="hidden"
+          name="subject"
+          value="Nuevo mensaje desde dot studio"
+        />
+        <input type="hidden" name="from_name" value="dot studio Website" />
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display:none"
+        />
+
+        <div class="form-group">
+          <label for="name">{t.contact.name}</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">{t.contact.email}</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">{t.contact.message}</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          {t.contact.send}
+          <ArrowRight size={18} strokeWidth={2} />
+        </button>
+
+        <p class="form-note">
+          {
+            t.contact.name === "Nombre"
+              ? "Tu mensaje llegará directamente a nuestro equipo."
+              : "Your message will go directly to our team."
+          }
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: 6rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-content {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s ease;
+  }
+
+  .contact-content.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-dot-shadow);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .info-item:hover {
+    color: var(--color-dot-purple-700);
+  }
+
+  .info-item :global(svg) {
+    color: var(--color-dot-purple-500);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    background: #fafafa;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.6s ease;
+  }
+
+  .contact-form.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: white;
+    transition: all 0.2s ease;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-dot-green-500);
+    box-shadow: 0 0 0 3px rgba(183, 255, 115, 0.15);
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: #1a1a1a;
+    background: var(--color-dot-green-500);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(183, 255, 115, 0.4);
+  }
+
+  .submit-btn :global(svg) {
+    transition: transform 0.2s ease;
+  }
+
+  .submit-btn:hover :global(svg) {
+    transform: translateX(4px);
+  }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: var(--color-dot-shadow);
+    text-align: center;
+    margin-top: -0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .contact-form {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll("#contact [data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+</script>

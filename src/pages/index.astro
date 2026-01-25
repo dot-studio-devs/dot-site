@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Stats from "../components/Stats.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Services from "../components/Services.astro";
+import About from "../components/About.astro";
+import Features from "../components/Features.astro";
+import Projects from "../components/Projects.astro";
+import CallToAction from "../components/CallToAction.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import PrivacyModal from "../components/PrivacyModal.astro";
+import TermsModal from "../components/TermsModal.astro";
+import { translations } from "../i18n/translations";
+import "../styles/globals.css";
+
+const lang = "es";
+const t = translations[lang];
+---
+
+<Layout
+  title="dot studio | Desarrollo Web Profesional"
+  description="Transformamos ideas en experiencias digitales. Creamos landing pages, sitios web y e-commerce a medida que impulsan tu negocio."
+  lang={lang}
+>
+  <Header t={t} lang={lang} />
+  <main>
+    <Hero t={t} />
+    <Stats t={t} lang={lang} />
+    <Testimonials lang={lang} />
+    <Services t={t} />
+    <About lang={lang} />
+    <Features t={t} lang={lang} />
+    <Projects t={t} lang={lang} />
+    <CallToAction t={t} lang={lang} />
+    <Contact t={t} />
+  </main>
+  <Footer t={t} lang={lang} />
+  <PrivacyModal lang={lang} />
+  <TermsModal lang={lang} />
+</Layout>

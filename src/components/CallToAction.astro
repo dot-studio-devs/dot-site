@@ -1,0 +1,190 @@
+---
+import type { Translations } from "../i18n/translations";
+import { ArrowRight } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+  lang: "es" | "en";
+}
+
+const { t, lang } = Astro.props;
+
+const title = lang === "es" ? "Listo para empezar?" : "Ready to start?";
+const subtitle =
+  lang === "es"
+    ? "Convierte tu visión en realidad. Hablemos sobre tu próximo proyecto."
+    : "Turn your vision into reality. Let's talk about your next project.";
+const cta = lang === "es" ? "Empezar ahora" : "Start now";
+---
+
+<section class="cta-section">
+  <div class="cta-bg">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+  </div>
+
+  <div class="container">
+    <div class="cta-content" data-animate>
+      <h2 class="cta-title">{title}</h2>
+      <p class="cta-subtitle">{subtitle}</p>
+      <a href="#contact" class="cta-button">
+        {cta}
+        <ArrowRight size={18} strokeWidth={2} />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+  }
+
+  .blob-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-green-500),
+      var(--color-dot-green-300)
+    );
+    top: -150px;
+    right: -100px;
+    animation: blob-float 12s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-purple-500),
+      var(--color-dot-purple-200)
+    );
+    bottom: -100px;
+    left: -100px;
+    animation: blob-float 15s ease-in-out infinite reverse;
+  }
+
+  @keyframes blob-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(30px, -30px) scale(1.1);
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-content {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+
+  .cta-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cta-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2.5rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.15rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: var(--color-dot-green-500);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 25px rgba(183, 255, 115, 0.25);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 40px rgba(183, 255, 115, 0.4);
+  }
+
+  .cta-button :global(svg) {
+    transition: transform 0.2s ease;
+  }
+
+  .cta-button:hover :global(svg) {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .cta-section {
+      padding: 5rem 1.5rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.05rem;
+    }
+  }
+</style>
+
+<script>
+  const ctaContent = document.querySelector(".cta-content");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
+
+  if (ctaContent) {
+    observer.observe(ctaContent);
+  }
+</script>

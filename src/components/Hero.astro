@@ -1,0 +1,319 @@
+---
+import type { Translations } from "../i18n/translations";
+import { ArrowRight, ChevronDown } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+    <div class="gradient-blob blob-4"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <span class="tagline">{t.hero.tagline}</span>
+    <h1 class="title">{t.hero.title}</h1>
+    <p class="subtitle">{t.hero.subtitle}</p>
+    <div class="cta-group">
+      <a href="#contact" class="cta-primary">
+        {t.hero.cta}
+        <ArrowRight size={18} strokeWidth={2} />
+      </a>
+      <a href="#projects" class="cta-secondary">{t.hero.ctaSecondary}</a>
+    </div>
+  </div>
+
+  <a href="#services" class="scroll-indicator" aria-label="Scroll down">
+    <ChevronDown size={24} strokeWidth={2} />
+  </a>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: white;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+  }
+
+  .blob-1 {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-green-300),
+      var(--color-dot-green-100)
+    );
+    top: -200px;
+    right: -100px;
+    animation: blob-float 12s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-purple-200),
+      var(--color-dot-purple-100)
+    );
+    bottom: -150px;
+    left: -150px;
+    animation: blob-float 15s ease-in-out infinite reverse;
+  }
+
+  .blob-3 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-green-500),
+      var(--color-dot-green-300)
+    );
+    top: 50%;
+    left: 5%;
+    opacity: 0.4;
+    animation: blob-float 10s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .blob-4 {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-purple-500),
+      var(--color-dot-purple-200)
+    );
+    top: 20%;
+    right: 15%;
+    opacity: 0.3;
+    animation: blob-float 14s ease-in-out infinite reverse;
+    animation-delay: -5s;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+  }
+
+  @keyframes blob-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translate(30px, -30px) scale(1.05) rotate(5deg);
+    }
+    50% {
+      transform: translate(-20px, 20px) scale(0.95) rotate(-5deg);
+    }
+    75% {
+      transform: translate(20px, 10px) scale(1.02) rotate(3deg);
+    }
+  }
+
+  .hero-content {
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tagline {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-dot-purple-700);
+    background: rgba(247, 241, 255, 0.8);
+    padding: 0.6rem 1.25rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.1s forwards;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(177, 140, 245, 0.2);
+  }
+
+  .title {
+    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: #1a1a1a;
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease 0.2s forwards;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-dot-shadow);
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease 0.35s forwards;
+  }
+
+  .cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease 0.5s forwards;
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.1rem 2.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: var(--color-dot-green-500);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 25px rgba(183, 255, 115, 0.35);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(183, 255, 115, 0.5);
+  }
+
+  .cta-primary :global(svg) {
+    transition: transform 0.2s ease;
+  }
+
+  .cta-primary:hover :global(svg) {
+    transform: translateX(4px);
+  }
+
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.1rem 2.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .cta-secondary:hover {
+    background: white;
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-dot-shadow);
+    opacity: 0.5;
+    animation: bounce 2s ease-in-out infinite;
+    animation-delay: 1.5s;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .scroll-indicator:hover {
+    opacity: 1;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(10px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .blob-1 {
+      width: 350px;
+      height: 350px;
+    }
+
+    .blob-2 {
+      width: 300px;
+      height: 300px;
+    }
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+import type { Translations } from "../i18n/translations";
+import { Zap, Users, Award, Clock } from "lucide-astro";
+
+interface Props {
+  t: Translations;
+  lang: "es" | "en";
+}
+
+const { t, lang } = Astro.props;
+
+const stats =
+  lang === "es"
+    ? [
+        { number: "10+", label: "Proyectos entregados", icon: "projects" },
+        { number: "10+", label: "Clientes satisfechos", icon: "clients" },
+        { number: "2", label: "Años de experiencia", icon: "experience" },
+        { number: "24h", label: "Tiempo de respuesta", icon: "response" },
+      ]
+    : [
+        { number: "10+", label: "Delivered projects", icon: "projects" },
+        { number: "10+", label: "Happy clients", icon: "clients" },
+        { number: "2", label: "Years of experience", icon: "experience" },
+        { number: "24h", label: "Response time", icon: "response" },
+      ];
+
+const title = lang === "es" ? "Números que hablan" : "Numbers that speak";
+const subtitle =
+  lang === "es"
+    ? "Resultados que respaldan nuestro compromiso con la excelencia"
+    : "Results that back our commitment to excellence";
+---
+
+<section class="stats">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
+    </div>
+
+    <div class="stats-grid">
+      {
+        stats.map((stat, index) => (
+          <div class="stat-card" data-animate data-delay={index * 100}>
+            <div class="stat-icon">
+              {stat.icon === "projects" && <Zap size={24} strokeWidth={1.5} />}
+              {stat.icon === "clients" && <Users size={24} strokeWidth={1.5} />}
+              {stat.icon === "experience" && (
+                <Award size={24} strokeWidth={1.5} />
+              )}
+              {stat.icon === "response" && (
+                <Clock size={24} strokeWidth={1.5} />
+              )}
+            </div>
+            <span class="stat-number">{stat.number}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    padding: 7rem 2rem;
+    background: #fafafa;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 0, 0, 0.08),
+      transparent
+    );
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+
+  .section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.5s ease;
+  }
+
+  .stat-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-green-100),
+      var(--color-dot-green-50)
+    );
+    border-radius: 14px;
+    margin: 0 auto 1.25rem;
+    color: var(--color-dot-green-700);
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--color-dot-shadow);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stats {
+      padding: 5rem 1.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll(".stats [data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+</script>

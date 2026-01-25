@@ -1,0 +1,531 @@
+---
+import { ChevronDown, Users, GraduationCap } from "lucide-astro";
+
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+
+const title = lang === "es" ? "Sobre nosotros" : "About us";
+const subtitle =
+  lang === "es"
+    ? "Conoce al equipo detrás de tus proyectos digitales"
+    : "Meet the team behind your digital projects";
+
+const description =
+  lang === "es"
+    ? "Somos un estudio de desarrollo web enfocado en crear experiencias digitales únicas. Desde hace más de 2 años venimos diseñando y desarrollando sitios web, landing pages, plataformas y tiendas online para empresas y emprendedores que buscan destacar en el mundo digital. Combinamos diseño moderno con tecnología de punta para entregar productos que no solo se ven increíbles, sino que funcionan perfectamente."
+    : "We are a web development studio focused on creating unique digital experiences. For over 2 years we have been designing and developing websites, landing pages, platforms and online stores for companies and entrepreneurs looking to stand out in the digital world. We combine modern design with cutting-edge technology to deliver products that not only look amazing, but work flawlessly.";
+
+const techTitle =
+  lang === "es" ? "Tecnologías que dominamos" : "Technologies we master";
+const eduTitle = lang === "es" ? "Formación académica" : "Academic background";
+
+const technologies = {
+  core: {
+    title: lang === "es" ? "Lenguajes" : "Languages",
+    items: [
+      { name: "HTML", icon: "html" },
+      { name: "CSS", icon: "css" },
+      { name: "JavaScript", icon: "js" },
+      { name: "TypeScript", icon: "ts" },
+      { name: "Java", icon: "java" },
+      { name: "Python", icon: "python" },
+      { name: "PHP", icon: "php" },
+    ],
+  },
+  frontend: {
+    title: "Frontend",
+    items: [
+      { name: "React", icon: "react" },
+      { name: "Vue", icon: "vue" },
+      { name: "Angular", icon: "angular" },
+      { name: "Gatsby", icon: "gatsby" },
+    ],
+  },
+  backend: {
+    title: "Backend",
+    items: [
+      { name: "Node.js", icon: "nodejs" },
+      { name: "NestJS", icon: "nestjs" },
+      { name: "Spring Boot", icon: "spring" },
+      { name: "Django", icon: "django" },
+      { name: "FastAPI", icon: "fastapi" },
+      { name: "Laravel", icon: "laravel" },
+    ],
+  },
+  fullstack: {
+    title: "Full Stack",
+    items: [
+      { name: "Next.js", icon: "nextjs" },
+      { name: "Nuxt.js", icon: "nuxt" },
+      { name: "Astro", icon: "astro" },
+    ],
+  },
+  design: {
+    title: lang === "es" ? "Diseño" : "Design",
+    items: [
+      { name: "Tailwind", icon: "tailwindcss" },
+      { name: "Bootstrap", icon: "bootstrap" },
+      { name: "Figma", icon: "figma" },
+      { name: "Photoshop", icon: "ps" },
+    ],
+  },
+  database: {
+    title: lang === "es" ? "Bases de datos" : "Databases",
+    items: [
+      { name: "MongoDB", icon: "mongodb" },
+      { name: "Supabase", icon: "supabase" },
+      { name: "Firebase", icon: "firebase" },
+      { name: "MySQL", icon: "mysql" },
+      { name: "PostgreSQL", icon: "postgresql" },
+    ],
+  },
+  tools: {
+    title: lang === "es" ? "Herramientas" : "Tools",
+    items: [
+      { name: "Docker", icon: "docker" },
+      { name: "GitHub", icon: "github" },
+      { name: "Git", icon: "git" },
+    ],
+  },
+};
+
+const education =
+  lang === "es"
+    ? [
+        {
+          name: "Coderhouse",
+          program: "Carrera Full Stack Developer",
+          image: "/student/coderhouse.jpg",
+        },
+        {
+          name: "Henry",
+          program: "Full Stack Development Bootcamp",
+          image: "/student/henry.jpg",
+        },
+        {
+          name: "ISSD",
+          program: "Tecnicatura en Desarrollo Web y Apps Móviles",
+          image: "/student/issd.png",
+        },
+        {
+          name: "Código Facilito",
+          program: "Bootcamp Frontend Moderno",
+          image: "/student/codigo-facilito.png",
+        },
+      ]
+    : [
+        {
+          name: "Coderhouse",
+          program: "Full Stack Developer Career",
+          image: "/student/coderhouse.jpg",
+        },
+        {
+          name: "Henry",
+          program: "Full Stack Development Bootcamp",
+          image: "/student/henry.jpg",
+        },
+        {
+          name: "ISSD",
+          program: "Web & Mobile Development Degree",
+          image: "/student/issd.png",
+        },
+        {
+          name: "Código Facilito",
+          program: "Modern Frontend Bootcamp",
+          image: "/student/codigo-facilito.png",
+        },
+      ];
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-content" data-animate>
+        <div class="about-icon">
+          <Users size={28} strokeWidth={1.5} />
+        </div>
+        <h2 class="section-title">{title}</h2>
+        <p class="section-subtitle">{subtitle}</p>
+        <p class="about-description">{description}</p>
+      </div>
+
+      <div class="tech-section" data-animate data-delay="200">
+        <button class="tech-toggle" id="tech-toggle">
+          <span class="tech-toggle-text">{techTitle}</span>
+          <ChevronDown size={20} strokeWidth={2} class="toggle-icon" />
+        </button>
+
+        <div class="tech-content" id="tech-content">
+          {
+            Object.values(technologies).map((category) => (
+              <div class="tech-category">
+                <h4 class="tech-category-title">{category.title}</h4>
+                <div class="tech-grid">
+                  {category.items.map((tech) => (
+                    <div class="tech-item">
+                      <img
+                        src={`https://skillicons.dev/icons?i=${tech.icon}`}
+                        alt={tech.name}
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                      />
+                      <span class="tech-name">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="education-section">
+          <div class="education-header">
+            <GraduationCap size={20} strokeWidth={1.5} />
+            <h3 class="education-title">{eduTitle}</h3>
+          </div>
+          <div class="education-grid">
+            {
+              education.map((edu) => (
+                <div class="education-item">
+                  <div class="education-logo">
+                    <img src={edu.image} alt={edu.name} loading="lazy" />
+                  </div>
+                  <div class="education-info">
+                    <span class="education-name">{edu.name}</span>
+                    <span class="education-program">{edu.program}</span>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 7rem 2rem;
+    background: #fafafa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-content {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.7s ease;
+  }
+
+  .about-content.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .about-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      var(--color-dot-purple-100),
+      var(--color-dot-purple-50)
+    );
+    border-radius: 14px;
+    color: var(--color-dot-purple-700);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-dot-shadow);
+  }
+
+  .tech-section {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.7s ease;
+  }
+
+  .tech-section.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .tech-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .tech-toggle:hover {
+    border-color: var(--color-dot-green-500);
+  }
+
+  .tech-toggle.active {
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+  }
+
+  .tech-toggle-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .toggle-icon {
+    color: var(--color-dot-shadow);
+    transition: transform 0.3s ease;
+  }
+
+  .tech-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .tech-content {
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    transition: max-height 0.4s ease;
+  }
+
+  .tech-content.expanded {
+    max-height: 1500px;
+  }
+
+  .tech-content > div {
+    padding: 1.5rem;
+  }
+
+  .tech-category {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .tech-category:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .tech-category-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1rem;
+  }
+
+  .tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #fafafa;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .tech-item:hover {
+    background: var(--color-dot-green-50);
+    transform: translateY(-2px);
+  }
+
+  .tech-item img {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+
+  .tech-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .education-section {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+  }
+
+  .education-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-dot-purple-700);
+  }
+
+  .education-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .education-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #fafafa;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .education-item:hover {
+    background: var(--color-dot-purple-50);
+    transform: translateY(-2px);
+  }
+
+  .education-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: white;
+  }
+
+  .education-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .education-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .education-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .education-program {
+    font-size: 0.75rem;
+    color: var(--color-dot-shadow);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 900px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .education-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll(".about [data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+
+  const techToggle = document.getElementById("tech-toggle");
+  const techContent = document.getElementById("tech-content");
+
+  techToggle?.addEventListener("click", () => {
+    techToggle.classList.toggle("active");
+    techContent?.classList.toggle("expanded");
+  });
+</script>

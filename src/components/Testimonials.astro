@@ -1,0 +1,313 @@
+---
+import { Star, Quote } from "lucide-astro";
+
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+
+const title =
+  lang === "es"
+    ? "Empresas que confían en nosotros"
+    : "Companies that trust us";
+const subtitle =
+  lang === "es"
+    ? "Lo que dicen nuestros clientes sobre trabajar con nosotros"
+    : "What our clients say about working with us";
+
+const testimonials =
+  lang === "es"
+    ? [
+        {
+          company: "Consentido Cognitivo",
+          name: "Noelia Uvilla",
+          role: "Psicopedagoga",
+          image: "/work/consentido.jpeg",
+          review:
+            "Excelente trabajo y profesionalismo. Entregaron el proyecto antes de tiempo y superaron todas mis expectativas. La comunicación fue impecable durante todo el proceso.",
+        },
+        {
+          company: "Dragon Pyramid",
+          name: "Gustavo Galdeano",
+          role: "CEO & Founder",
+          image: "/work/dragon-pyramid.jpg",
+          review:
+            "Transformaron completamente nuestra presencia digital. El diseño es moderno, rápido y nuestros clientes no paran de elogiarlo. Muy recomendados.",
+        },
+        {
+          company: "Zatobox",
+          name: "Luis Leon",
+          role: "Director",
+          image: "/work/zatobox.jpg",
+          review:
+            "Desde el primer contacto demostraron ser profesionales. El e-commerce que nos desarrollaron incrementó nuestras ventas en un 40%. Increíble resultado.",
+        },
+      ]
+    : [
+        {
+          company: "Consentido Cognitivo",
+          name: "Noelia Uvilla",
+          role: "Educational Psychologist",
+          image: "/work/consentido.jpeg",
+          review:
+            "Excellent work and professionalism. They delivered the project ahead of schedule and exceeded all my expectations. Communication was impeccable throughout.",
+        },
+        {
+          company: "Dragon Pyramid",
+          name: "Gustavo Galdeano",
+          role: "CEO & Founder",
+          image: "/work/dragon-pyramid.jpg",
+          review:
+            "They completely transformed our digital presence. The design is modern, fast and our customers keep praising it. Highly recommended.",
+        },
+        {
+          company: "Zatobox",
+          name: "Luis Leon",
+          role: "Director",
+          image: "/work/zatobox.jpg",
+          review:
+            "From the first contact they proved to be professionals. The e-commerce they developed for us increased our sales by 40%. Incredible result.",
+        },
+      ];
+---
+
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
+    </div>
+
+    <div class="testimonials-grid">
+      {
+        testimonials.map((testimonial, index) => (
+          <article
+            class="testimonial-card"
+            data-animate
+            data-delay={index * 150}
+          >
+            <div class="testimonial-header">
+              <div class="company-image">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.company}
+                  loading="lazy"
+                />
+              </div>
+              <div class="company-info">
+                <h3 class="company-name">{testimonial.company}</h3>
+                <div class="stars">
+                  <Star size={16} fill="currentColor" strokeWidth={0} />
+                  <Star size={16} fill="currentColor" strokeWidth={0} />
+                  <Star size={16} fill="currentColor" strokeWidth={0} />
+                  <Star size={16} fill="currentColor" strokeWidth={0} />
+                  <Star size={16} fill="currentColor" strokeWidth={0} />
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-content">
+              <Quote size={24} class="quote-icon" />
+              <p class="review">{testimonial.review}</p>
+            </div>
+
+            <div class="testimonial-author">
+              <span class="author-name">{testimonial.name}</span>
+              <span class="author-role">{testimonial.role}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding: 7rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+
+  .section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-dot-shadow);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    padding: 2rem;
+    background: #fafafa;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.5s ease;
+  }
+
+  .testimonial-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .company-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .company-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .company-info {
+    flex: 1;
+  }
+
+  .company-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.15rem;
+    color: #fbbf24;
+  }
+
+  .testimonial-content {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-icon {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    color: var(--color-dot-green-300);
+    opacity: 0.5;
+  }
+
+  .review {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-dot-shadow);
+    padding-left: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .author-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .author-role {
+    font-size: 0.8rem;
+    color: var(--color-dot-shadow);
+  }
+
+  @media (max-width: 900px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .testimonials {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll(
+    ".testimonials [data-animate]",
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+</script>

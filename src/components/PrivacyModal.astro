@@ -1,0 +1,267 @@
+---
+import { X } from "lucide-astro";
+
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+
+const title = lang === "es" ? "Política de Privacidad" : "Privacy Policy";
+const lastUpdate =
+  lang === "es"
+    ? "Última actualización: Enero 2026"
+    : "Last updated: January 2026";
+
+const content =
+  lang === "es"
+    ? {
+        intro:
+          "En dot studio, respetamos tu privacidad y nos comprometemos a proteger tus datos personales. Esta política describe cómo recopilamos, usamos y protegemos tu información.",
+        sections: [
+          {
+            title: "1. Información que recopilamos",
+            text: "Recopilamos información que nos proporcionas directamente, como tu nombre, dirección de correo electrónico y cualquier mensaje que nos envíes a través del formulario de contacto. No recopilamos información automáticamente ni usamos cookies de seguimiento.",
+          },
+          {
+            title: "2. Uso de la información",
+            text: "Utilizamos la información recopilada únicamente para: responder a tus consultas y solicitudes, comunicarnos contigo sobre proyectos potenciales, y mejorar nuestros servicios. Nunca vendemos ni compartimos tu información con terceros para fines de marketing.",
+          },
+          {
+            title: "3. Protección de datos",
+            text: "Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger tus datos personales contra acceso no autorizado, alteración, divulgación o destrucción.",
+          },
+          {
+            title: "4. Tus derechos",
+            text: "Tienes derecho a acceder, rectificar o eliminar tus datos personales en cualquier momento. Para ejercer estos derechos, contáctanos a través del correo electrónico proporcionado en nuestro sitio web.",
+          },
+          {
+            title: "5. Retención de datos",
+            text: "Conservamos tus datos personales solo durante el tiempo necesario para cumplir con los fines descritos en esta política, a menos que la ley requiera un período de retención más largo.",
+          },
+          {
+            title: "6. Cambios en la política",
+            text: "Podemos actualizar esta política ocasionalmente. Te notificaremos sobre cambios significativos publicando la nueva política en nuestro sitio web.",
+          },
+          {
+            title: "7. Contacto",
+            text: "Si tienes preguntas sobre esta política de privacidad, puedes contactarnos en franespindola71@gmail.com.",
+          },
+        ],
+      }
+    : {
+        intro:
+          "At dot studio, we respect your privacy and are committed to protecting your personal data. This policy describes how we collect, use, and protect your information.",
+        sections: [
+          {
+            title: "1. Information we collect",
+            text: "We collect information you provide directly to us, such as your name, email address, and any messages you send through the contact form. We do not automatically collect information or use tracking cookies.",
+          },
+          {
+            title: "2. Use of information",
+            text: "We use the collected information solely to: respond to your inquiries and requests, communicate with you about potential projects, and improve our services. We never sell or share your information with third parties for marketing purposes.",
+          },
+          {
+            title: "3. Data protection",
+            text: "We implement appropriate technical and organizational security measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.",
+          },
+          {
+            title: "4. Your rights",
+            text: "You have the right to access, rectify, or delete your personal data at any time. To exercise these rights, contact us through the email provided on our website.",
+          },
+          {
+            title: "5. Data retention",
+            text: "We retain your personal data only for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required by law.",
+          },
+          {
+            title: "6. Policy changes",
+            text: "We may update this policy occasionally. We will notify you of significant changes by posting the new policy on our website.",
+          },
+          {
+            title: "7. Contact",
+            text: "If you have questions about this privacy policy, you can contact us at franespindola71@gmail.com.",
+          },
+        ],
+      };
+
+const closeText = lang === "es" ? "Cerrar" : "Close";
+---
+
+<div class="modal-overlay" id="privacy-modal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2 class="modal-title">{title}</h2>
+      <button class="modal-close" aria-label={closeText}>
+        <X size={24} strokeWidth={1.5} />
+      </button>
+    </div>
+
+    <div class="modal-content">
+      <p class="modal-date">{lastUpdate}</p>
+      <p class="modal-intro">{content.intro}</p>
+
+      {
+        content.sections.map((section) => (
+          <div class="modal-section">
+            <h3>{section.title}</h3>
+            <p>{section.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-container {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .modal-close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+  }
+
+  .modal-close:hover {
+    background: #e5e5e5;
+  }
+
+  .modal-content {
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  .modal-date {
+    font-size: 0.85rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-intro {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+  }
+
+  .modal-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-section p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-dot-shadow);
+  }
+
+  @media (max-width: 600px) {
+    .modal-overlay {
+      padding: 1rem;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .modal-content {
+      padding: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("privacy-modal");
+  const closeBtn = modal?.querySelector(".modal-close");
+
+  document.querySelectorAll("[data-open-privacy]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal?.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal?.classList.remove("active");
+    document.body.style.overflow = "";
+  });
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal?.classList.contains("active")) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+</script>

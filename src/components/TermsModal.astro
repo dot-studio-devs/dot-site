@@ -1,0 +1,291 @@
+---
+import { X } from "lucide-astro";
+
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+
+const title = lang === "es" ? "Términos y Condiciones" : "Terms and Conditions";
+const lastUpdate =
+  lang === "es"
+    ? "Última actualización: Enero 2026"
+    : "Last updated: January 2026";
+
+const content =
+  lang === "es"
+    ? {
+        intro:
+          "Al utilizar los servicios de dot studio, aceptas los siguientes términos y condiciones. Por favor, léelos cuidadosamente antes de contratar nuestros servicios.",
+        sections: [
+          {
+            title: "1. Servicios",
+            text: "dot studio ofrece servicios de diseño y desarrollo web, incluyendo pero no limitado a: landing pages, sitios web corporativos, tiendas en línea (e-commerce) y mantenimiento web. Los detalles específicos de cada proyecto se acordarán por escrito antes de comenzar el trabajo.",
+          },
+          {
+            title: "2. Presupuestos y pagos",
+            text: "Los presupuestos son válidos por 30 días desde su emisión. Requerimos un anticipo del 50% para comenzar el proyecto y el 50% restante se abona al finalizar, antes de la entrega final. Los precios no incluyen impuestos aplicables a menos que se indique lo contrario.",
+          },
+          {
+            title: "3. Plazos de entrega",
+            text: "Los plazos de entrega se establecen al inicio de cada proyecto y dependen de su complejidad. Los retrasos causados por la falta de materiales o aprobaciones por parte del cliente pueden extender los plazos acordados.",
+          },
+          {
+            title: "4. Revisiones",
+            text: "Cada proyecto incluye un número razonable de revisiones según lo acordado. Las revisiones adicionales o cambios significativos en el alcance del proyecto pueden generar costos adicionales que se comunicarán previamente.",
+          },
+          {
+            title: "5. Propiedad intelectual",
+            text: "Una vez completado el pago total, el cliente obtiene los derechos de uso del producto final. dot studio retiene el derecho de mostrar el trabajo en su portafolio y materiales promocionales, a menos que se acuerde lo contrario por escrito.",
+          },
+          {
+            title: "6. Responsabilidad",
+            text: "dot studio no se hace responsable por daños indirectos, incidentales o consecuentes derivados del uso de nuestros servicios. Nuestra responsabilidad máxima se limita al monto pagado por el cliente por el proyecto en cuestión.",
+          },
+          {
+            title: "7. Cancelación",
+            text: "El cliente puede cancelar el proyecto en cualquier momento. Sin embargo, el anticipo no es reembolsable y se facturará el trabajo realizado hasta la fecha de cancelación.",
+          },
+          {
+            title: "8. Confidencialidad",
+            text: "Nos comprometemos a mantener la confidencialidad de toda la información proporcionada por el cliente durante y después de la relación comercial.",
+          },
+          {
+            title: "9. Modificaciones",
+            text: "dot studio se reserva el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor para nuevos proyectos a partir de su publicación.",
+          },
+          {
+            title: "10. Contacto",
+            text: "Para cualquier consulta sobre estos términos, contáctanos en franespindola71@gmail.com.",
+          },
+        ],
+      }
+    : {
+        intro:
+          "By using dot studio services, you accept the following terms and conditions. Please read them carefully before hiring our services.",
+        sections: [
+          {
+            title: "1. Services",
+            text: "dot studio offers web design and development services, including but not limited to: landing pages, corporate websites, online stores (e-commerce), and web maintenance. The specific details of each project will be agreed upon in writing before starting work.",
+          },
+          {
+            title: "2. Quotes and payments",
+            text: "Quotes are valid for 30 days from issuance. We require a 50% deposit to start the project and the remaining 50% is paid upon completion, before final delivery. Prices do not include applicable taxes unless otherwise indicated.",
+          },
+          {
+            title: "3. Delivery times",
+            text: "Delivery times are established at the beginning of each project and depend on its complexity. Delays caused by lack of materials or approvals from the client may extend the agreed deadlines.",
+          },
+          {
+            title: "4. Revisions",
+            text: "Each project includes a reasonable number of revisions as agreed. Additional revisions or significant changes to the project scope may incur additional costs that will be communicated in advance.",
+          },
+          {
+            title: "5. Intellectual property",
+            text: "Once full payment is completed, the client obtains usage rights to the final product. dot studio retains the right to display the work in its portfolio and promotional materials, unless otherwise agreed in writing.",
+          },
+          {
+            title: "6. Liability",
+            text: "dot studio is not responsible for indirect, incidental, or consequential damages arising from the use of our services. Our maximum liability is limited to the amount paid by the client for the project in question.",
+          },
+          {
+            title: "7. Cancellation",
+            text: "The client may cancel the project at any time. However, the deposit is non-refundable and work completed up to the cancellation date will be invoiced.",
+          },
+          {
+            title: "8. Confidentiality",
+            text: "We commit to maintaining the confidentiality of all information provided by the client during and after the business relationship.",
+          },
+          {
+            title: "9. Modifications",
+            text: "dot studio reserves the right to modify these terms at any time. Changes will take effect for new projects from their publication.",
+          },
+          {
+            title: "10. Contact",
+            text: "For any questions about these terms, contact us at franespindola71@gmail.com.",
+          },
+        ],
+      };
+
+const closeText = lang === "es" ? "Cerrar" : "Close";
+---
+
+<div class="modal-overlay" id="terms-modal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2 class="modal-title">{title}</h2>
+      <button class="modal-close" aria-label={closeText}>
+        <X size={24} strokeWidth={1.5} />
+      </button>
+    </div>
+
+    <div class="modal-content">
+      <p class="modal-date">{lastUpdate}</p>
+      <p class="modal-intro">{content.intro}</p>
+
+      {
+        content.sections.map((section) => (
+          <div class="modal-section">
+            <h3>{section.title}</h3>
+            <p>{section.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-container {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .modal-close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+  }
+
+  .modal-close:hover {
+    background: #e5e5e5;
+  }
+
+  .modal-content {
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  .modal-date {
+    font-size: 0.85rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-intro {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+  }
+
+  .modal-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-section p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-dot-shadow);
+  }
+
+  @media (max-width: 600px) {
+    .modal-overlay {
+      padding: 1rem;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .modal-content {
+      padding: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("terms-modal");
+  const closeBtn = modal?.querySelector(".modal-close");
+
+  document.querySelectorAll("[data-open-terms]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal?.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal?.classList.remove("active");
+    document.body.style.overflow = "";
+  });
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal?.classList.contains("active")) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+</script>
