@@ -212,11 +212,14 @@ const education =
   .about {
     padding: 7rem 2rem;
     background: #fafafa;
+    overflow-x: hidden;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .about-layout {
@@ -277,6 +280,10 @@ const education =
     opacity: 0;
     transform: translateX(30px);
     transition: all 0.7s ease;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .tech-section.visible {
@@ -338,6 +345,7 @@ const education =
 
   .tech-content > div {
     padding: 1.5rem;
+    box-sizing: border-box;
   }
 
   .tech-category {
@@ -491,6 +499,52 @@ const education =
 
     .education-grid {
       grid-template-columns: 1fr;
+    }
+
+    .tech-toggle {
+      padding: 1rem;
+    }
+
+    .tech-content > div {
+      padding: 1rem;
+    }
+
+    .education-section {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about {
+      padding: 4rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+    }
+
+    .tech-grid {
+      gap: 0.5rem;
+    }
+
+    .tech-item {
+      padding: 0.4rem 0.6rem;
+    }
+
+    .tech-name {
+      font-size: 0.8rem;
+    }
+
+    .education-item {
+      padding: 0.6rem;
+    }
+
+    .education-program {
+      font-size: 0.7rem;
     }
   }
 </style>
