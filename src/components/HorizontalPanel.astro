@@ -1,0 +1,27 @@
+---
+
+---
+
+<div class="hs-panel">
+  <div class="hs-panel-inner">
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  .hs-panel-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .hs-panel-inner {
+      height: auto;
+      overflow: visible;
+    }
+  }
+</style>

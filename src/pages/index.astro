@@ -15,6 +15,8 @@ import PrivacyModal from "../components/PrivacyModal.astro";
 import TermsModal from "../components/TermsModal.astro";
 import { translations } from "../i18n/translations";
 import CustomCursor from "../components/CustomCursor.astro";
+import HorizontalScrollContainer from "../components/HorizontalScrollContainer.astro";
+import HorizontalPanel from "../components/HorizontalPanel.astro";
 import "../styles/globals.css";
 import "../styles/scrollbar.css";
 
@@ -30,11 +32,27 @@ const t = translations[lang];
   <Header t={t} lang={lang} />
   <main>
     <Hero t={t} />
-    <Stats t={t} lang={lang} />
-    <Testimonials lang={lang} />
+
+    <HorizontalScrollContainer id="scroll-1">
+      <HorizontalPanel>
+        <Stats t={t} lang={lang} />
+      </HorizontalPanel>
+      <HorizontalPanel>
+        <Testimonials lang={lang} />
+      </HorizontalPanel>
+    </HorizontalScrollContainer>
+
     <Services t={t} />
-    <About lang={lang} />
-    <Features t={t} lang={lang} />
+
+    <HorizontalScrollContainer id="scroll-2">
+      <HorizontalPanel>
+        <About lang={lang} />
+      </HorizontalPanel>
+      <HorizontalPanel>
+        <Features t={t} lang={lang} />
+      </HorizontalPanel>
+    </HorizontalScrollContainer>
+
     <Projects t={t} lang={lang} />
     <CallToAction t={t} lang={lang} />
     <Contact t={t} />
