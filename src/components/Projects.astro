@@ -1,6 +1,6 @@
 ---
 import type { Translations } from "../i18n/translations";
-import { ChevronDown, ChevronUp } from "lucide-astro";
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-astro";
 
 interface Props {
   t: Translations;
@@ -14,21 +14,71 @@ const featuredProjects = [
     name: "Liz",
     image: "/projects/liz.png",
     category: "Landing Page",
+    description: {
+      es: "Liz es una aplicación web moderna y responsive diseñada para entusiastas del anime y manga. Permite descubrir contenido en tendencia, buscar con filtros avanzados, trackear el progreso de visualización/lectura y gestionar listas personalizadas. Construida con Vue 3, Supabase y la API de AniList.",
+      en: "Liz is a modern, responsive web application designed for anime and manga enthusiasts. It allows users to discover trending content, search with advanced filters, track their watching/reading progress, and manage custom lists. Built with Vue 3, Supabase, and the AniList API.",
+    },
+    technologies: [
+      "Vue.js",
+      "TailwindCSS",
+      "Pinia",
+      "Anilist API",
+      "Supabase",
+      "Vite",
+    ],
+    url: "https://liz-beth.vercel.app/",
   },
   {
     name: "Zatobox",
     image: "/projects/zatobox.png",
     category: "E-commerce",
+    description: {
+      es: "ZatoBox es un sistema POS modular y open-source para PyMEs y emprendedores. Incluye gestión de inventario en la nube, catálogos online con ZatoLink, conexión de pagos mediante ZatoConnect y próximos módulos como Smart Inventory y automatización. Diseñado para ser simple, escalable y adaptable a cualquier negocio.",
+      en: "ZatoBox is a modular, open-source POS system for SMEs and entrepreneurs. It includes cloud-based inventory management, online catalogs with ZatoLink, payment connection through ZatoConnect, and upcoming modules like Smart Inventory and automation. Designed to be simple, scalable, and adaptable to any business.",
+    },
+    technologies: [
+      "React.js",
+      "Zustand",
+      "Supabase",
+      "Next.js",
+      "Python",
+      "PostgreSQL",
+      "Docker",
+      "Vercel",
+      "Tailwind CSS",
+      "TypeScript",
+    ],
+    url: "https://www.zatobox.io/",
   },
   {
     name: "Consentido Cognitivo",
     image: "/projects/consentido.png",
     category: "Web Platform",
+    description: {
+      es: "Sitio web informativo y accesible sobre estimulación neurocognitiva para adultos mayores, con recursos descargables y talleres cognitivos enfocados en el envejecimiento activo.",
+      en: "Informational and accessible website for neurocognitive stimulation for older adults, featuring downloadable resources and cognitive workshops focused on active aging.",
+    },
+    url: "https://www.consentidocognitivo.site/",
+    technologies: ["UX Design", "Neurocognitive Stimulation", "Active Aging"],
   },
   {
     name: "Zynee",
     image: "/projects/zynee.png",
     category: "Web App",
+    description: {
+      es: "Zynee es una Progressive Web App (PWA) enfocada en gestión financiera personal. Permite registrar y categorizar gastos, crear alcancías con objetivos específicos y ver reportes dinámicos. Incluye un módulo para organizaciones donde un líder puede registrar miembros, gestionar pagos y mantener un historial completo de transacciones internas.",
+      en: "Zynee is a Progressive Web App (PWA) focused on personal financial management. It enables users to log and categorize expenses, create savings jars with specific goals, and view dynamic reports. It also includes a module for organizations, where a leader can register members, manage payments, and maintain a complete history of internal transactions.",
+    },
+    technologies: [
+      "TailwindCSS",
+      "Next.js",
+      "Supabase",
+      "React.js",
+      "Chart.js",
+      "Zustand",
+      "TypeScript",
+    ],
+    url: "https://zynee.vercel.app/",
   },
 ];
 
@@ -37,31 +87,95 @@ const moreProjects = [
     name: "Zzyn",
     image: "/projects/zzyn.png",
     category: "Website",
+    description: {
+      es: "Landing page estática para entusiastas del anime. Sirve como portfolio de tus series y películas favoritas, mostrando una selección curada de contenido desde clásicos hasta títulos modernos. Desarrollada con Nuxt.js para rendimiento rápido y optimización SEO, con Tailwind CSS para un diseño limpio, moderno y responsive.",
+      en: "Static landing page for anime enthusiasts. It serves as a portfolio of your favorite series and movies, showcasing a carefully curated selection of content, from classics to modern titles. Developed with Nuxt.js for fast performance and SEO optimization, and with Tailwind CSS for a clean, modern, and responsive design.",
+    },
+    technologies: ["Nuxt.js", "TailwindCSS", "Vue.js", "CSS", "pnpm"],
+    url: "https://zzyn.vercel.app/",
   },
   {
     name: "Zynner Solutions",
     image: "/projects/zynner-solutions.png",
     category: "Corporate",
+    description: {
+      es: "Portfolio minimalista corporativo para mostrar servicios y proyectos de manera elegante y profesional.",
+      en: "Minimalist corporate portfolio to showcase services and projects in an elegant and professional way.",
+    },
+    technologies: ["Astro.js", "TailwindCSS"],
+    url: "https://zynner-portfolio.vercel.app/",
   },
   {
     name: "Portfolio",
     image: "/projects/portfolio.png",
     category: "Personal",
+    description: {
+      es: "Mi nuevo portfolio personal, mostrando mis últimos proyectos y trabajos. Construido con Astro para crear una experiencia de usuario rápida y optimizada, demostrando mis habilidades en desarrollo web y diseño.",
+      en: "My new personal portfolio, showcasing my latest projects and work. Built with Astro to create a fast and optimized user experience while demonstrating my web development and design skills.",
+    },
+    url: "https://frysccou.dev",
+    technologies: [
+      "Astro.js",
+      "TypeScript",
+      "Vercel",
+      "TailwindCSS",
+      "UX/UI Design",
+    ],
   },
   {
     name: "Gym Master",
     image: "/projects/gym-master.jpg",
     category: "Fitness",
+    description: {
+      es: "Gym Master es un sistema integral de gestión de gimnasios desarrollado por Dragon Pyramid, diseñado para automatizar tareas administrativas, mejorar la interacción con los miembros y proporcionar herramientas inteligentes para rutinas personalizadas y planes de nutrición.",
+      en: "Gym Master is a comprehensive gym management system built by Dragon Pyramid, designed to automate administrative tasks, enhance member engagement, and provide intelligent tools for personalized routines and nutrition plans.",
+    },
+    technologies: [
+      "React.js",
+      "Supabase",
+      "Next.js",
+      "Tailwind CSS",
+      "Python",
+      "PostgreSQL",
+      "Zustand",
+    ],
+    url: "https://gym-master-new.vercel.app/",
   },
   {
     name: "XView",
     image: "/projects/xview.jpg",
     category: "App",
+    description: {
+      es: "XView es una plataforma de gestión y compra de manga diseñada para ofrecer una experiencia inmersiva y visualmente atractiva. Cuenta con interfaz moderna con gradientes animados y efecto glassmorphism, catálogo de productos funcional, carrito de compras integrado, sistema de autenticación con Supabase y diseño responsive con animaciones fluidas.",
+      en: "XView is a manga management and purchasing platform designed to provide an immersive, visually appealing experience. Features a modern interface with animated gradients and glassmorphism effect, fully functional product catalog, integrated shopping cart, authentication system with Supabase, and responsive design with fluid animations.",
+    },
+    url: "https://xview.vercel.app/",
+    technologies: [
+      "Next.js",
+      "React.js",
+      "TailwindCSS",
+      "Framer Motion",
+      "Supabase",
+      "PostgreSQL",
+    ],
   },
   {
     name: "Bycarket",
     image: "/projects/bycarket.jpg",
     category: "Marketplace",
+    description: {
+      es: "Como parte de un proyecto en equipo, desarrollamos una plataforma web para compra y venta de vehículos que combina diseño moderno, inteligencia artificial y un robusto full-stack. Me enfoqué en toda la lógica de integración frontend-backend, implementé la lógica de pagos con Stripe e integré funcionalidades de IA.",
+      en: "As part of a team project, we developed a web platform for buying and selling vehicles that combines modern design, artificial intelligence, and a robust full-stack. I focused on the entire integration logic between the frontend and backend, implemented payment logic with Stripe, and integrated AI functionalities.",
+    },
+    url: "https://bycarket-front-main.vercel.app/home",
+    technologies: [
+      "NextJS",
+      "NestJS",
+      "TypeScript",
+      "TailwindCSS",
+      "Stripe",
+      "AI",
+    ],
   },
 ];
 
@@ -87,6 +201,32 @@ const showLess = lang === "es" ? "Ver menos" : "Show less";
             <div class="project-info">
               <span class="project-category">{project.category}</span>
               <h3 class="project-name">{project.name}</h3>
+              {project.description && (
+                <p class="project-description">{project.description[lang]}</p>
+              )}
+              {project.technologies && (
+                <div class="project-technologies">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                  {project.technologies.length > 4 && (
+                    <span class="tech-tag more">
+                      +{project.technologies.length - 4}
+                    </span>
+                  )}
+                </div>
+              )}
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  <ExternalLink size={16} strokeWidth={2} />
+                  <span>{lang === "es" ? "Ver proyecto" : "View project"}</span>
+                </a>
+              )}
             </div>
           </article>
         ))
@@ -105,6 +245,34 @@ const showLess = lang === "es" ? "Ver menos" : "Show less";
               <div class="project-info">
                 <span class="project-category">{project.category}</span>
                 <h3 class="project-name">{project.name}</h3>
+                {project.description && (
+                  <p class="project-description">{project.description[lang]}</p>
+                )}
+                {project.technologies && (
+                  <div class="project-technologies">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span class="tech-tag">{tech}</span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span class="tech-tag more">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                  >
+                    <ExternalLink size={14} strokeWidth={2} />
+                    <span>
+                      {lang === "es" ? "Ver proyecto" : "View project"}
+                    </span>
+                  </a>
+                )}
               </div>
             </article>
           ))
@@ -250,6 +418,62 @@ const showLess = lang === "es" ? "Ver menos" : "Show less";
     font-size: 1.25rem;
     font-weight: 600;
     color: #1a1a1a;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+    color: var(--color-dot-shadow);
+    line-height: 1.6;
+    margin-top: 0.75rem;
+  }
+
+  .project-card.small .project-description {
+    font-size: 0.85rem;
+  }
+
+  .project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tech-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-dot-green-900);
+    background: var(--color-dot-green-100);
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  .tech-tag.more {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--color-dot-shadow);
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-dot-green-900);
+    background: var(--color-dot-green-100);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .project-link:hover {
+    background: var(--color-dot-green-300);
+    transform: translateX(4px);
+  }
+
+  .project-card.small .project-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 
   .more-projects-wrapper {
