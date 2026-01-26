@@ -14,6 +14,7 @@ import Footer from "../components/Footer.astro";
 import PrivacyModal from "../components/PrivacyModal.astro";
 import TermsModal from "../components/TermsModal.astro";
 import { translations } from "../i18n/translations";
+import CustomCursor from "../components/CustomCursor.astro";
 import "../styles/globals.css";
 import "../styles/scrollbar.css";
 
@@ -22,7 +23,7 @@ const t = translations[lang];
 ---
 
 <Layout
-  title="dot studio | Desarrollo Web Profesional"
+  title="Dot Studio | Desarrollo Web Profesional"
   description="Transformamos ideas en experiencias digitales. Creamos landing pages, sitios web y e-commerce a medida que impulsan tu negocio."
   lang={lang}
 >
@@ -41,4 +42,5 @@ const t = translations[lang];
   <Footer t={t} lang={lang} />
   <PrivacyModal lang={lang} />
   <TermsModal lang={lang} />
+  <CustomCursor />
 </Layout>

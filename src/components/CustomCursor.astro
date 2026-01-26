@@ -1,0 +1,214 @@
+---
+
+---
+
+<div class="cursor-wrapper">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="cursor-glow"></div>
+</div>
+
+<style>
+  :global(body) {
+    cursor: none !important;
+  }
+
+  :global(
+    a,
+    button,
+    [role="button"],
+    .tech-toggle,
+    .project-card,
+    .show-more-btn
+  ) {
+    cursor: none !important;
+  }
+
+  .cursor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
+  }
+
+  .cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--color-dot-green-500);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: 0 0 15px var(--color-dot-green-500);
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--color-dot-purple-500);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    transition:
+      width 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+      height 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+      border-color 0.4s ease,
+      background-color 0.4s ease;
+  }
+
+  .cursor-glow {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(
+      circle,
+      rgba(177, 140, 245, 0.15) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    filter: blur(20px);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Interaction States */
+  .cursor-wrapper.hover .cursor-dot {
+    width: 4px;
+    height: 4px;
+    opacity: 0.5;
+  }
+
+  .cursor-wrapper.hover .cursor-ring {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(177, 140, 245, 0.1);
+    border-color: var(--color-dot-green-500);
+    backdrop-filter: blur(1px);
+  }
+
+  .cursor-wrapper.active .cursor-ring {
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-dot-green-500);
+    border-color: var(--color-dot-green-500);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 1024px) {
+    .cursor-wrapper {
+      display: none;
+    }
+    :global(body),
+    :global(a, button) {
+      cursor: auto !important;
+    }
+  }
+</style>
+
+<script>
+  const wrapper = document.querySelector(".cursor-wrapper") as HTMLElement;
+  const dot = document.querySelector(".cursor-dot") as HTMLElement;
+  const ring = document.querySelector(".cursor-ring") as HTMLElement;
+  const glow = document.querySelector(".cursor-glow") as HTMLElement;
+
+  let mouse = { x: -100, y: -100 };
+  let dotPos = { x: -100, y: -100 };
+  let ringPos = { x: -100, y: -100 };
+  let glowPos = { x: -100, y: -100 };
+
+  let magneticTarget: HTMLElement | null = null;
+
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  const lerp = (start: number, end: number, amt: number) =>
+    (1 - amt) * start + amt * end;
+
+  const animate = () => {
+    let targetX = mouse.x;
+    let targetY = mouse.y;
+
+    if (magneticTarget) {
+      const rect = magneticTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const dist = Math.hypot(centerX - mouse.x, centerY - mouse.y);
+      if (dist < 150) {
+        targetX = lerp(mouse.x, centerX, 0.4);
+        targetY = lerp(mouse.y, centerY, 0.4);
+      }
+    }
+
+    dotPos.x = lerp(dotPos.x, targetX, 0.35);
+    dotPos.y = lerp(dotPos.y, targetY, 0.35);
+
+    ringPos.x = lerp(ringPos.x, targetX, 0.15);
+    ringPos.y = lerp(ringPos.y, targetY, 0.15);
+
+    glowPos.x = lerp(glowPos.x, targetX, 0.05);
+    glowPos.y = lerp(glowPos.y, targetY, 0.05);
+
+    if (dot)
+      dot.style.transform = `translate3d(${dotPos.x}px, ${dotPos.y}px, 0) translate(-50%, -50%)`;
+    if (ring)
+      ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
+    if (glow)
+      glow.style.transform = `translate3d(${glowPos.x}px, ${glowPos.y}px, 0) translate(-50%, -50%)`;
+
+    requestAnimationFrame(animate);
+  };
+
+  animate();
+
+  const updateInteractions = () => {
+    const clickables = document.querySelectorAll(
+      'a, button, .tech-toggle, .project-card, .show-more-btn, [role="button"]',
+    );
+
+    clickables.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        wrapper?.classList.add("hover");
+        if (
+          el.classList.contains("tech-toggle") ||
+          el.tagName === "BUTTON" ||
+          el.tagName === "A" ||
+          el.classList.contains("project-card")
+        ) {
+          magneticTarget = el as HTMLElement;
+        }
+      });
+
+      el.addEventListener("mouseleave", () => {
+        wrapper?.classList.remove("hover");
+        magneticTarget = null;
+      });
+    });
+  };
+
+  updateInteractions();
+  window.addEventListener("mousedown", () => wrapper?.classList.add("active"));
+  window.addEventListener("mouseup", () => wrapper?.classList.remove("active"));
+
+  new MutationObserver(updateInteractions).observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  document.addEventListener("mouseleave", () => {
+    if (wrapper) wrapper.style.display = "none";
+  });
+  document.addEventListener("mouseenter", () => {
+    if (wrapper) wrapper.style.display = "block";
+  });
+</script>
