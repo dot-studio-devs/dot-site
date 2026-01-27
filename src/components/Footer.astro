@@ -1,12 +1,6 @@
 ---
 import type { Translations } from "../i18n/translations";
-import {
-  Github,
-  Twitter,
-  Linkedin,
-  Instagram,
-  ArrowUpRight,
-} from "lucide-astro";
+import { Github, Linkedin, Instagram, ArrowUpRight } from "lucide-astro";
 
 interface Props {
   t: Translations;
@@ -78,16 +72,31 @@ const contactTitle = lang === "es" ? "Contacto" : "Contact";
             }
           </p>
           <div class="footer-socials">
-            <a href="#" class="social-link" aria-label="Twitter">
-              <Twitter size={18} strokeWidth={1.5} />
-            </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/espindola-francisco"
+              class="social-link"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Linkedin size={18} strokeWidth={1.5} />
             </a>
-            <a href="#" class="social-link" aria-label="Instagram">
+            <a
+              href="https://www.instagram.com/dotstudio_dev/"
+              class="social-link"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Instagram size={18} strokeWidth={1.5} />
             </a>
-            <a href="#" class="social-link" aria-label="GitHub">
+            <a
+              href="https://github.com/esspindola"
+              class="social-link"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Github size={18} strokeWidth={1.5} />
             </a>
           </div>
@@ -128,10 +137,10 @@ const contactTitle = lang === "es" ? "Contacto" : "Contact";
           <ul class="footer-links-list">
             <li>
               <a
-                href="mailto:franespindola71@gmail.com"
+                href="mailto:dot_studio_dev@gmail.com"
                 class="footer-link email"
               >
-                franespindola71@gmail.com
+                dot_studio_dev@gmail.com
                 <ArrowUpRight size={14} strokeWidth={2} />
               </a>
             </li>
