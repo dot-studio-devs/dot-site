@@ -1,0 +1,621 @@
+---
+import type { Translations } from "../i18n/translations";
+import {
+  ShoppingCart,
+  Mail,
+  Github,
+  Wallet,
+  CreditCard,
+  CheckCircle2,
+  Play,
+} from "lucide-astro";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const topics = [
+  "React",
+  "Portfolio",
+  "Marketing",
+  "Astro 5",
+  "Professional",
+  "Tailwind CSS 4",
+  "Framer Motion",
+  "Lucide React",
+  "Hexagonal Architecture",
+];
+---
+
+<section id="market" class="market">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <h2 class="section-title">{t.market.title}</h2>
+      <p class="section-subtitle">{t.market.subtitle}</p>
+    </div>
+
+    <div class="market-grid">
+      <div class="product-preview" data-animate data-delay="100">
+        <div class="media-container" id="media-container">
+          <div class="poster-preview" id="poster-preview">
+            <img
+              src="/templates/landing-template.png"
+              alt="Template Preview"
+              class="poster-image"
+            />
+            <button
+              class="play-trigger"
+              id="play-video-btn"
+              aria-label="Play video preview"
+            >
+              <Play size={32} fill="currentColor" />
+            </button>
+          </div>
+
+          <div class="video-wrapper hidden" id="video-wrapper">
+            <video
+              id="template-video-player"
+              src="/preview/preview.mp4"
+              controls
+              loop
+              muted
+              playsinline
+              class="template-video"></video>
+          </div>
+        </div>
+
+        <div class="product-details">
+          <div class="about-section">
+            <h3 class="detail-title">{t.market.aboutTitle}</h3>
+            <p class="about-desc">{t.market.aboutDesc}</p>
+          </div>
+
+          <div class="topics-section">
+            <h3 class="detail-title">{t.market.topicsTitle}</h3>
+            <div class="topics-grid">
+              {topics.map((topic) => <span class="topic-tag">{topic}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-card" data-animate data-delay="300">
+        <div class="pricing-header">
+          <div class="price-options">
+            <div class="price-item">
+              <span class="currency">ARS</span>
+              <span class="amount">{t.market.priceARS}</span>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-item">
+              <span class="currency">USD</span>
+              <span class="amount">{t.market.priceUSD}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-methods">
+          <div class="method">
+            <h4 class="method-title">
+              <CreditCard size={20} class="method-icon" />
+              Mercado Pago (ARS)
+            </h4>
+            <a
+              href="https://mpago.la/2EQWepT"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="buy-button mp-button"
+            >
+              <ShoppingCart size={20} />
+              {t.market.buyNow}
+            </a>
+          </div>
+
+          <div class="method crypto">
+            <h4 class="method-title">
+              <Wallet size={20} class="method-icon" />
+              {t.market.cryptoTitle}
+            </h4>
+            <p class="crypto-desc">{t.market.cryptoDesc}</p>
+            <div class="wallet-address">
+              <code>0xf2f000a27e36778597f79d9fb38ce31841a3f028</code>
+            </div>
+            <p class="crypto-hint">USDT / USDC (Polygon)</p>
+          </div>
+        </div>
+
+        <div class="post-payment">
+          <div class="instruction-header">
+            <CheckCircle2 size={24} class="instruction-icon" />
+            <h4 class="instruction-title">{t.market.postPaymentTitle}</h4>
+          </div>
+          <p class="instruction-text">{t.market.postPaymentDesc}</p>
+
+          <ul class="requirements-list">
+            <li>
+              <Mail size={16} />
+              Email de GitHub
+            </li>
+            <li>
+              <Github size={16} />
+              Usuario de GitHub
+            </li>
+            <li>
+              <Github size={16} />
+              Link al Perfil
+            </li>
+          </ul>
+
+          <div class="emails-container">
+            <a href="mailto:dot_studio_dev@gmail.com" class="email-link">
+              dot_studio_dev@gmail.com
+            </a>
+            <span class="email-separator">o</span>
+            <a
+              href="mailto:franespindola71@gmail.com"
+              class="email-link secondary"
+            >
+              franespindola71@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .market {
+    padding: 8rem 2rem;
+    background: #ffffff;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a3475 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-dot-shadow);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .market-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .product-preview {
+    flex: 1 1 600px;
+    min-width: 0;
+    background: #fcfcfc;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .product-preview.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .media-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .poster-preview {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      opacity 0.5s ease,
+      visibility 0.5s;
+  }
+
+  .poster-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play-trigger {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-dot-green-500);
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(183, 255, 115, 0.4);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 3;
+  }
+
+  .play-trigger:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(183, 255, 115, 0.6);
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  .video-wrapper.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .template-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-details {
+    padding: 2.5rem;
+  }
+
+  .detail-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .about-desc {
+    color: var(--color-dot-shadow);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
+  }
+
+  .topics-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .topic-tag {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-dot-purple-900);
+    background: var(--color-dot-purple-50);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    border: 1px solid var(--color-dot-purple-100);
+  }
+
+  .payment-card {
+    flex: 1 1 400px;
+    min-width: 0;
+    background: white;
+    border-radius: 28px;
+    padding: 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .payment-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pricing-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  }
+
+  .price-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .price-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .currency {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-dot-shadow);
+    margin-bottom: 0.2rem;
+  }
+
+  .amount {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1a1a1a;
+  }
+
+  .price-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .method-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: #1a1a1a;
+  }
+
+  .method-icon {
+    color: var(--color-dot-purple-500);
+  }
+
+  .buy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--color-dot-green-500);
+    color: #1a1a1a;
+  }
+
+  .buy-button:hover {
+    background: var(--color-dot-green-700);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(183, 255, 115, 0.4);
+  }
+
+  .crypto {
+    padding: 1.5rem;
+    background: var(--color-dot-purple-50);
+    border-radius: 20px;
+    border: 1px solid var(--color-dot-purple-100);
+  }
+
+  .crypto-desc {
+    font-size: 0.9rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1rem;
+  }
+
+  .wallet-address {
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-dot-purple-100);
+    margin-bottom: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .wallet-address code {
+    font-family: inherit;
+    font-size: 0.8rem;
+    color: var(--color-dot-purple-900);
+    white-space: nowrap;
+    word-break: break-all;
+  }
+
+  .crypto-hint {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-dot-purple-700);
+  }
+
+  .post-payment {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .instruction-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .instruction-icon {
+    color: var(--color-dot-green-700);
+  }
+
+  .instruction-title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .instruction-text {
+    font-size: 0.95rem;
+    color: var(--color-dot-shadow);
+    margin-bottom: 1.5rem;
+  }
+
+  .requirements-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .requirements-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .requirements-list li :global(svg) {
+    color: var(--color-dot-purple-500);
+  }
+
+  .emails-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .email-link {
+    display: inline-block;
+    color: var(--color-dot-purple-700);
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    word-break: break-all;
+  }
+
+  .email-separator {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-dot-shadow);
+  }
+
+  @media (min-width: 1025px) {
+    .payment-card {
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .market {
+      padding: 4rem 1.25rem;
+    }
+
+    .market-grid {
+      gap: 2rem;
+    }
+
+    .product-preview,
+    .payment-card {
+      flex: 1 1 100%;
+      padding: 1.5rem;
+    }
+
+    .amount {
+      font-size: 1.4rem;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+    }
+
+    .play-trigger {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<script>
+  const animateElements = document.querySelectorAll("#market [data-animate]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute("data-delay") || 0;
+          setTimeout(
+            () => {
+              entry.target.classList.add("visible");
+            },
+            parseInt(delay as string),
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
+
+  animateElements.forEach((el) => observer.observe(el));
+
+  const playBtn = document.getElementById("play-video-btn");
+  const posterPreview = document.getElementById("poster-preview");
+  const videoWrapper = document.getElementById("video-wrapper");
+  const player = document.getElementById(
+    "template-video-player",
+  ) as HTMLVideoElement;
+
+  playBtn?.addEventListener("click", () => {
+    if (posterPreview && videoWrapper && player) {
+      posterPreview.style.opacity = "0";
+      posterPreview.style.visibility = "hidden";
+      videoWrapper.classList.remove("hidden");
+      player.play();
+    }
+  });
+</script>

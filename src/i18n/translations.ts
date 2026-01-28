@@ -3,7 +3,24 @@ export const translations = {
     nav: {
       services: "Servicios",
       projects: "Proyectos",
+      market: "Marketplace",
       contact: "Contacto",
+    },
+    market: {
+      title: "Marketplace",
+      subtitle: "Plantillas premium de alto rendimiento",
+      buyNow: "Comprar ahora",
+      priceARS: "35.000 ARS",
+      priceUSD: "30 USD",
+      postPaymentTitle: "Instrucciones Post-Pago",
+      postPaymentDesc:
+        "Tras el pago, envía el comprobante a franespindola71@gmail.com adjuntando tu email de GitHub, nombre de usuario y link al perfil para darte acceso.",
+      cryptoTitle: "Pago con Cripto (Polygon)",
+      cryptoDesc: "Envía USDT o USDC vía Red Polygon a:",
+      aboutTitle: "Sobre la plantilla",
+      aboutDesc:
+        "Una plantilla de Landing Page profesional y de alto rendimiento construida con Astro 5, Tailwind CSS 4 y Framer Motion. Diseñada bajo Arquitectura Hexagonal para máxima mantenibilidad y escalabilidad.",
+      topicsTitle: "Tecnologías",
     },
     hero: {
       tagline: "Desarrollo Web Profesional",
@@ -52,7 +69,24 @@ export const translations = {
     nav: {
       services: "Services",
       projects: "Projects",
+      market: "Marketplace",
       contact: "Contact",
+    },
+    market: {
+      title: "Marketplace",
+      subtitle: "High-performance premium templates",
+      buyNow: "Buy Now",
+      priceARS: "35,000 ARS",
+      priceUSD: "30 USD",
+      postPaymentTitle: "Post-Payment Instructions",
+      postPaymentDesc:
+        "After payment, send the receipt to franespindola71@gmail.com including your GitHub email, username, and profile link to get access.",
+      cryptoTitle: "Crypto Payment (Polygon)",
+      cryptoDesc: "Send USDT or USDC via Polygon Network to:",
+      aboutTitle: "About this template",
+      aboutDesc:
+        "A professional, high-performance landing page template built with Astro 5, Tailwind CSS 4, and Framer Motion. Designed with a Hexagonal Architecture approach to ensure maximum maintainability.",
+      topicsTitle: "Technologies",
     },
     hero: {
       tagline: "Professional Web Development",
