@@ -10,17 +10,29 @@ export const translations = {
       title: "Marketplace",
       subtitle: "Plantillas premium de alto rendimiento",
       buyNow: "Comprar ahora",
-      priceARS: "35.000 ARS",
-      priceUSD: "30 USD",
       postPaymentTitle: "Instrucciones Post-Pago",
       postPaymentDesc:
-        "Tras el pago, envía el comprobante a franespindola71@gmail.com adjuntando tu email de GitHub, nombre de usuario y link al perfil para darte acceso.",
+        "Tras el pago, envía el comprobante a dot_studio_dev@gmail.com o franespindola71@gmail.com adjuntando tu email de GitHub, nombre de usuario y link al perfil para darte acceso.",
       cryptoTitle: "Pago con Cripto (Polygon)",
       cryptoDesc: "Envía USDT o USDC vía Red Polygon a:",
       aboutTitle: "Sobre la plantilla",
-      aboutDesc:
-        "Una plantilla de Landing Page profesional y de alto rendimiento construida con Astro 5, Tailwind CSS 4 y Framer Motion. Diseñada bajo Arquitectura Hexagonal para máxima mantenibilidad y escalabilidad.",
       topicsTitle: "Tecnologías",
+      items: {
+        landing: {
+          name: "Landing Template",
+          priceARS: "35.000 ARS",
+          priceUSD: "30 USD",
+          aboutDesc:
+            "Una plantilla de Landing Page profesional y de alto rendimiento construida con Astro 5, Tailwind CSS 4 y Framer Motion. Diseñada bajo Arquitectura Hexagonal para máxima mantenibilidad y escalabilidad.",
+        },
+        blog: {
+          name: "Blog Template",
+          priceARS: "47.500 ARS",
+          priceUSD: "45 USD",
+          aboutDesc:
+            "Una plantilla de Blog profesional y moderna diseñada para el alto rendimiento y SEO. Incluye sistema de contenidos dinámico, animaciones fluidas y una experiencia de lectura premium.",
+        },
+      },
     },
     hero: {
       tagline: "Desarrollo Web Profesional",
@@ -76,17 +88,29 @@ export const translations = {
       title: "Marketplace",
       subtitle: "High-performance premium templates",
       buyNow: "Buy Now",
-      priceARS: "35,000 ARS",
-      priceUSD: "30 USD",
       postPaymentTitle: "Post-Payment Instructions",
       postPaymentDesc:
-        "After payment, send the receipt to franespindola71@gmail.com including your GitHub email, username, and profile link to get access.",
+        "After payment, send the receipt to dot_studio_dev@gmail.com or franespindola71@gmail.com including your GitHub email, username, and profile link to get access.",
       cryptoTitle: "Crypto Payment (Polygon)",
       cryptoDesc: "Send USDT or USDC via Polygon Network to:",
       aboutTitle: "About this template",
-      aboutDesc:
-        "A professional, high-performance landing page template built with Astro 5, Tailwind CSS 4, and Framer Motion. Designed with a Hexagonal Architecture approach to ensure maximum maintainability.",
       topicsTitle: "Technologies",
+      items: {
+        landing: {
+          name: "Landing Template",
+          priceARS: "35,000 ARS",
+          priceUSD: "30 USD",
+          aboutDesc:
+            "A professional, high-performance landing page template built with Astro 5, Tailwind CSS 4, and Framer Motion. Designed with a Hexagonal Architecture approach to ensure maximum maintainability.",
+        },
+        blog: {
+          name: "Blog Template",
+          priceARS: "47,500 ARS",
+          priceUSD: "45 USD",
+          aboutDesc:
+            "A professional and modern Blog template designed for high performance and SEO. Features a dynamic content system, smooth animations and a premium reading experience.",
+        },
+      },
     },
     hero: {
       tagline: "Professional Web Development",

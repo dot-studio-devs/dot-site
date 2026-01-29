@@ -8,6 +8,7 @@ import {
   CreditCard,
   CheckCircle2,
   Play,
+  ArrowRight,
 } from "lucide-astro";
 
 interface Props {
@@ -16,17 +17,52 @@ interface Props {
 
 const { t } = Astro.props;
 
-const topics = [
-  "React",
-  "Portfolio",
-  "Marketing",
-  "Astro 5",
-  "Professional",
-  "Tailwind CSS 4",
-  "Framer Motion",
-  "Lucide React",
-  "Hexagonal Architecture",
+const products = [
+  {
+    id: "landing",
+    name: t.market.items.landing.name,
+    priceARS: t.market.items.landing.priceARS,
+    priceUSD: t.market.items.landing.priceUSD,
+    mpLink: "https://mpago.la/2EQWepT",
+    image: "/templates/landing-template.png",
+    video: "/preview/preview.mp4",
+    desc: t.market.items.landing.aboutDesc,
+    topics: [
+      "React",
+      "Portfolio",
+      "Marketing",
+      "Astro 5",
+      "Professional",
+      "Tailwind CSS 4",
+      "Framer Motion",
+      "Lucide React",
+      "Hexagonal Architecture",
+    ],
+  },
+  {
+    id: "blog",
+    name: t.market.items.blog.name,
+    priceARS: t.market.items.blog.priceARS,
+    priceUSD: t.market.items.blog.priceUSD,
+    mpLink: "https://mpago.la/2qSZUuE",
+    image: "/templates/blog-template.png",
+    video: "/preview/blog-preview.mp4",
+    desc: t.market.items.blog.aboutDesc,
+    topics: [
+      "Blog",
+      "SEO Optimized",
+      "Astro 5",
+      "Content Collections",
+      "Dynamic Routing",
+      "Tailwind CSS 4",
+      "Framer Motion",
+      "Responsive Design",
+      "TypeScript",
+    ],
+  },
 ];
+
+const productsJson = JSON.stringify(products);
 ---
 
 <section id="market" class="market">
@@ -36,129 +72,181 @@ const topics = [
       <p class="section-subtitle">{t.market.subtitle}</p>
     </div>
 
-    <div class="market-grid">
-      <div class="product-preview" data-animate data-delay="100">
-        <div class="media-container" id="media-container">
-          <div class="poster-preview" id="poster-preview">
-            <img
-              src="/templates/landing-template.png"
-              alt="Template Preview"
-              class="poster-image"
-            />
-            <button
-              class="play-trigger"
-              id="play-video-btn"
-              aria-label="Play video preview"
-            >
-              <Play size={32} fill="currentColor" />
-            </button>
+    <div class="showroom-grid" data-animate data-delay="100">
+      {
+        products.map((product) => (
+          <button
+            class="showroom-item"
+            data-product-id={product.id}
+            id={`btn-${product.id}`}
+          >
+            <div class="item-preview">
+              <img src={product.image} alt={product.name} />
+              <div class="item-overlay">
+                <span class="view-details">
+                  {t.market.buyNow} <ArrowRight size={16} />
+                </span>
+              </div>
+            </div>
+            <div class="item-info">
+              <h3 class="item-name">{product.name}</h3>
+              <div class="item-price">
+                <span>{product.priceARS}</span>
+                <span class="price-dot" />
+                <span>{product.priceUSD}</span>
+              </div>
+            </div>
+          </button>
+        ))
+      }
+    </div>
+
+    <div
+      class="product-display"
+      id="product-display"
+      data-animate
+      data-delay="200"
+    >
+      <div class="market-grid">
+        <div class="product-preview" id="active-preview">
+          <div class="media-container" id="media-container">
+            <div class="poster-preview" id="poster-preview">
+              <img
+                src={products[0].image}
+                alt="Template Preview"
+                class="poster-image"
+                id="active-image"
+              />
+              <button
+                class="play-trigger"
+                id="play-video-btn"
+                aria-label="Play video preview"
+              >
+                <Play size={32} fill="currentColor" />
+              </button>
+            </div>
+
+            <div class="video-wrapper hidden" id="video-wrapper">
+              <video
+                id="template-video-player"
+                src={products[0].video}
+                controls
+                loop
+                muted
+                playsinline
+                class="template-video"></video>
+            </div>
           </div>
 
-          <div class="video-wrapper hidden" id="video-wrapper">
-            <video
-              id="template-video-player"
-              src="/preview/preview.mp4"
-              controls
-              loop
-              muted
-              playsinline
-              class="template-video"></video>
+          <div class="product-details">
+            <div class="about-section">
+              <h3 class="detail-title">{t.market.aboutTitle}</h3>
+              <p class="about-desc" id="active-desc">{products[0].desc}</p>
+            </div>
+
+            <div class="topics-section">
+              <h3 class="detail-title">{t.market.topicsTitle}</h3>
+              <div class="topics-grid" id="active-topics">
+                {
+                  products[0].topics.map((topic) => (
+                    <span class="topic-tag">{topic}</span>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="product-details">
-          <div class="about-section">
-            <h3 class="detail-title">{t.market.aboutTitle}</h3>
-            <p class="about-desc">{t.market.aboutDesc}</p>
+        <div class="payment-card" id="active-payment">
+          <div class="pricing-header">
+            <div class="price-options">
+              <div class="price-item">
+                <span class="currency">ARS</span>
+                <span class="amount" id="active-price-ars"
+                  >{products[0].priceARS}</span
+                >
+              </div>
+              <div class="price-divider"></div>
+              <div class="price-item">
+                <span class="currency">USD</span>
+                <span class="amount" id="active-price-usd"
+                  >{products[0].priceUSD}</span
+                >
+              </div>
+            </div>
           </div>
 
-          <div class="topics-section">
-            <h3 class="detail-title">{t.market.topicsTitle}</h3>
-            <div class="topics-grid">
-              {topics.map((topic) => <span class="topic-tag">{topic}</span>)}
+          <div class="payment-methods">
+            <div class="method">
+              <h4 class="method-title">
+                <CreditCard size={20} class="method-icon" />
+                Mercado Pago (ARS)
+              </h4>
+              <a
+                href={products[0].mpLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="buy-button mp-button"
+                id="active-mp-link"
+              >
+                <ShoppingCart size={20} />
+                {t.market.buyNow}
+              </a>
+            </div>
+
+            <div class="method crypto">
+              <h4 class="method-title">
+                <Wallet size={20} class="method-icon" />
+                {t.market.cryptoTitle}
+              </h4>
+              <p class="crypto-desc">{t.market.cryptoDesc}</p>
+              <div class="wallet-address">
+                <code>0xf2f000a27e36778597f79d9fb38ce31841a3f028</code>
+              </div>
+              <p class="crypto-hint">USDT / USDC (Polygon)</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="payment-card" data-animate data-delay="300">
-        <div class="pricing-header">
-          <div class="price-options">
-            <div class="price-item">
-              <span class="currency">ARS</span>
-              <span class="amount">{t.market.priceARS}</span>
-            </div>
-            <div class="price-divider"></div>
-            <div class="price-item">
-              <span class="currency">USD</span>
-              <span class="amount">{t.market.priceUSD}</span>
-            </div>
-          </div>
+    <div class="post-payment-section" data-animate data-delay="300">
+      <div class="post-payment-content">
+        <div class="instruction-header">
+          <CheckCircle2 size={32} class="instruction-icon" />
+          <h4 class="instruction-title">{t.market.postPaymentTitle}</h4>
         </div>
+        <p class="instruction-text">{t.market.postPaymentDesc}</p>
 
-        <div class="payment-methods">
-          <div class="method">
-            <h4 class="method-title">
-              <CreditCard size={20} class="method-icon" />
-              Mercado Pago (ARS)
-            </h4>
-            <a
-              href="https://mpago.la/2EQWepT"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="buy-button mp-button"
-            >
-              <ShoppingCart size={20} />
-              {t.market.buyNow}
-            </a>
-          </div>
-
-          <div class="method crypto">
-            <h4 class="method-title">
-              <Wallet size={20} class="method-icon" />
-              {t.market.cryptoTitle}
-            </h4>
-            <p class="crypto-desc">{t.market.cryptoDesc}</p>
-            <div class="wallet-address">
-              <code>0xf2f000a27e36778597f79d9fb38ce31841a3f028</code>
-            </div>
-            <p class="crypto-hint">USDT / USDC (Polygon)</p>
-          </div>
-        </div>
-
-        <div class="post-payment">
-          <div class="instruction-header">
-            <CheckCircle2 size={24} class="instruction-icon" />
-            <h4 class="instruction-title">{t.market.postPaymentTitle}</h4>
-          </div>
-          <p class="instruction-text">{t.market.postPaymentDesc}</p>
-
+        <div class="post-payment-grid">
           <ul class="requirements-list">
             <li>
-              <Mail size={16} />
+              <Mail size={18} />
               Email de GitHub
             </li>
             <li>
-              <Github size={16} />
+              <Github size={18} />
               Usuario de GitHub
             </li>
             <li>
-              <Github size={16} />
+              <Github size={18} />
               Link al Perfil
             </li>
           </ul>
 
-          <div class="emails-container">
-            <a href="mailto:dot_studio_dev@gmail.com" class="email-link">
-              dot_studio_dev@gmail.com
-            </a>
-            <span class="email-separator">o</span>
-            <a
-              href="mailto:franespindola71@gmail.com"
-              class="email-link secondary"
-            >
-              franespindola71@gmail.com
-            </a>
+          <div class="contact-info">
+            <div class="emails-container">
+              <a href="mailto:dot_studio_dev@gmail.com" class="email-link">
+                dot_studio_dev@gmail.com
+              </a>
+              <span class="email-separator">o</span>
+              <a
+                href="mailto:franespindola71@gmail.com"
+                class="email-link secondary"
+              >
+                franespindola71@gmail.com
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -171,6 +259,7 @@ const topics = [
     padding: 8rem 2rem;
     background: #ffffff;
     position: relative;
+    overflow: hidden;
   }
 
   .container {
@@ -209,6 +298,136 @@ const topics = [
     margin: 0 auto;
   }
 
+  .showroom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 6rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .showroom-grid.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .showroom-item {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fbfbfb;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .showroom-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .showroom-item.active {
+    outline: 3px solid var(--color-dot-green-500);
+    outline-offset: 4px;
+    box-shadow: 0 20px 50px rgba(183, 255, 115, 0.2);
+  }
+
+  .item-preview {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+
+  .item-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .showroom-item:hover .item-preview img {
+    transform: scale(1.05);
+  }
+
+  .item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .showroom-item:hover .item-overlay {
+    opacity: 1;
+  }
+
+  .view-details {
+    background: var(--color-dot-green-500);
+    color: #1a1a1a;
+    padding: 0.8rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .showroom-item:hover .view-details {
+    transform: translateY(0);
+  }
+
+  .item-info {
+    padding: 1.5rem;
+  }
+
+  .item-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-price {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--color-dot-shadow);
+    font-weight: 600;
+  }
+
+  .price-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+
+  .product-display {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-bottom: 6rem;
+  }
+
+  .product-display.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .market-grid {
     display: flex;
     flex-wrap: wrap;
@@ -220,18 +439,10 @@ const topics = [
     flex: 1 1 600px;
     min-width: 0;
     background: #fcfcfc;
-    border-radius: 24px;
+    border-radius: 28px;
     border: 1px solid rgba(0, 0, 0, 0.05);
     overflow: hidden;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .product-preview.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .media-container {
@@ -249,9 +460,7 @@ const topics = [
     display: flex;
     align-items: center;
     justify-content: center;
-    transition:
-      opacity 0.5s ease,
-      visibility 0.5s;
+    transition: opacity 0.5s ease;
   }
 
   .poster-image {
@@ -303,37 +512,37 @@ const topics = [
   }
 
   .product-details {
-    padding: 2.5rem;
+    padding: 3rem;
   }
 
   .detail-title {
     font-size: 1.1rem;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   .about-desc {
     color: var(--color-dot-shadow);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
   }
 
   .topics-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
 
   .topic-tag {
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--color-dot-purple-900);
     background: var(--color-dot-purple-50);
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1.25rem;
     border-radius: 100px;
     border: 1px solid var(--color-dot-purple-100);
   }
@@ -342,18 +551,10 @@ const topics = [
     flex: 1 1 400px;
     min-width: 0;
     background: white;
-    border-radius: 28px;
-    padding: 2.5rem;
+    border-radius: 32px;
+    padding: 3rem;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .payment-card.visible {
-    opacity: 1;
-    transform: translateY(0);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
   }
 
   .pricing-header {
@@ -375,38 +576,38 @@ const topics = [
   }
 
   .currency {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--color-dot-shadow);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
   }
 
   .amount {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #1a1a1a;
+    letter-spacing: -0.02em;
   }
 
   .price-divider {
     width: 1px;
-    height: 40px;
+    height: 50px;
     background: rgba(0, 0, 0, 0.1);
   }
 
   .payment-methods {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 2.5rem;
   }
 
   .method-title {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     color: #1a1a1a;
   }
 
@@ -420,67 +621,80 @@ const topics = [
     justify-content: center;
     gap: 0.75rem;
     width: 100%;
-    padding: 1.25rem;
-    border-radius: 16px;
+    padding: 1.4rem;
+    border-radius: 20px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--color-dot-green-500);
     color: #1a1a1a;
+    box-shadow: 0 10px 20px rgba(183, 255, 115, 0.2);
   }
 
   .buy-button:hover {
     background: var(--color-dot-green-700);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(183, 255, 115, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(183, 255, 115, 0.4);
   }
 
   .crypto {
-    padding: 1.5rem;
+    padding: 2rem;
     background: var(--color-dot-purple-50);
-    border-radius: 20px;
+    border-radius: 24px;
     border: 1px solid var(--color-dot-purple-100);
   }
 
   .crypto-desc {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--color-dot-shadow);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
   }
 
   .wallet-address {
     background: white;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
+    padding: 1rem;
+    border-radius: 16px;
     border: 1px solid var(--color-dot-purple-100);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     overflow-x: auto;
   }
 
   .wallet-address code {
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-dot-purple-900);
     white-space: nowrap;
     word-break: break-all;
+    font-weight: 600;
   }
 
   .crypto-hint {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: var(--color-dot-purple-700);
   }
 
-  .post-payment {
-    padding-top: 2rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  .post-payment-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    background: #f8f9fa;
+    border-radius: 40px;
+    padding: 4rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .post-payment-section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .instruction-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .instruction-icon {
@@ -488,56 +702,79 @@ const topics = [
   }
 
   .instruction-title {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
   }
 
   .instruction-text {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     color: var(--color-dot-shadow);
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+
+  .post-payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
   }
 
   .requirements-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
   }
 
   .requirements-list li {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.9rem;
-    font-weight: 600;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: #1a1a1a;
+    padding: 0.5rem 0;
   }
 
   .requirements-list li :global(svg) {
     color: var(--color-dot-purple-500);
   }
 
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .emails-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
   .email-link {
     display: inline-block;
     color: var(--color-dot-purple-700);
-    font-weight: 700;
-    font-size: 1.05rem;
+    font-weight: 800;
+    font-size: 1.5rem;
     transition: all 0.3s ease;
     word-break: break-all;
+    letter-spacing: -0.02em;
+  }
+
+  .email-link:hover {
+    color: var(--color-dot-purple-900);
+    transform: translateX(5px);
   }
 
   .email-separator {
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-dot-shadow);
+    padding: 0.25rem 0;
   }
 
   @media (min-width: 1025px) {
@@ -547,27 +784,47 @@ const topics = [
     }
   }
 
+  @media (max-width: 1024px) {
+    .post-payment-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
   @media (max-width: 768px) {
     .market {
       padding: 4rem 1.25rem;
     }
 
-    .market-grid {
-      gap: 2rem;
+    .showroom-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
     .product-preview,
-    .payment-card {
-      flex: 1 1 100%;
-      padding: 1.5rem;
+    .payment-card,
+    .post-payment-section {
+      padding: 2rem;
+    }
+
+    .post-payment-section {
+      border-radius: 28px;
     }
 
     .amount {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
     }
 
     .section-title {
-      font-size: 2.25rem;
+      font-size: 2.5rem;
+    }
+
+    .instruction-title {
+      font-size: 1.25rem;
+    }
+
+    .email-link {
+      font-size: 1.1rem;
     }
 
     .play-trigger {
@@ -577,7 +834,7 @@ const topics = [
   }
 </style>
 
-<script>
+<script define:vars={{ products: products }}>
   const animateElements = document.querySelectorAll("#market [data-animate]");
 
   const observer = new IntersectionObserver(
@@ -585,12 +842,9 @@ const topics = [
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const delay = entry.target.getAttribute("data-delay") || 0;
-          setTimeout(
-            () => {
-              entry.target.classList.add("visible");
-            },
-            parseInt(delay as string),
-          );
+          setTimeout(() => {
+            entry.target.classList.add("visible");
+          }, parseInt(delay));
           observer.unobserve(entry.target);
         }
       });
@@ -606,9 +860,52 @@ const topics = [
   const playBtn = document.getElementById("play-video-btn");
   const posterPreview = document.getElementById("poster-preview");
   const videoWrapper = document.getElementById("video-wrapper");
-  const player = document.getElementById(
-    "template-video-player",
-  ) as HTMLVideoElement;
+  const player = document.getElementById("template-video-player");
+
+  const showroomItems = document.querySelectorAll(".showroom-item");
+  const activeImage = document.getElementById("active-image");
+  const activeDesc = document.getElementById("active-desc");
+  const activeTopics = document.getElementById("active-topics");
+  const activePriceArs = document.getElementById("active-price-ars");
+  const activePriceUsd = document.getElementById("active-price-usd");
+  const activeMpLink = document.getElementById("active-mp-link");
+  const displayArea = document.getElementById("product-display");
+
+  function updateProduct(productId) {
+    const product = products.find((p) => p.id === productId);
+    if (!product) return;
+
+    showroomItems.forEach((btn) => btn.classList.remove("active"));
+    document.getElementById(`btn-${productId}`).classList.add("active");
+
+    posterPreview.style.opacity = "1";
+    posterPreview.style.visibility = "visible";
+    videoWrapper.classList.add("hidden");
+    player.pause();
+    player.src = product.video;
+
+    activeImage.src = product.image;
+    activeDesc.textContent = product.desc;
+    activePriceArs.textContent = product.priceARS;
+    activePriceUsd.textContent = product.priceUSD;
+    activeMpLink.href = product.mpLink;
+
+    activeTopics.innerHTML = "";
+    product.topics.forEach((topic) => {
+      const span = document.createElement("span");
+      span.className = "topic-tag";
+      span.textContent = topic;
+      activeTopics.appendChild(span);
+    });
+
+    displayArea.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  showroomItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      updateProduct(item.dataset.productId);
+    });
+  });
 
   playBtn?.addEventListener("click", () => {
     if (posterPreview && videoWrapper && player) {
@@ -618,4 +915,6 @@ const topics = [
       player.play();
     }
   });
+
+  document.getElementById("btn-landing").classList.add("active");
 </script>
