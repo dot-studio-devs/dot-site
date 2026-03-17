@@ -11,22 +11,34 @@ const { t, lang } = Astro.props;
 
 const featuredProjects = [
   {
-    name: "Liz",
-    image: "/projects/liz.png",
-    category: "Landing Page",
+    name: "Tokenit",
+    image: "/projects/tokenit.png",
+    category: "Fintech & Web3",
     description: {
-      es: "Liz es una aplicación web moderna y responsive diseñada para entusiastas del anime y manga. Permite descubrir contenido en tendencia, buscar con filtros avanzados, trackear el progreso de visualización/lectura y gestionar listas personalizadas. Construida con Vue 3, Supabase y la API de AniList.",
-      en: "Liz is a modern, responsive web application designed for anime and manga enthusiasts. It allows users to discover trending content, search with advanced filters, track their watching/reading progress, and manage custom lists. Built with Vue 3, Supabase, and the AniList API.",
+      es: "Plataforma chilena de financiamiento colectivo que permite invertir online en renta fija inmobiliaria mediante activos tokenizados en blockchain. Estoy a cargo de la landing pública, marketplace y el dashboard del inversor con monitoreo en tiempo real, KYC, firma digital y scoring de riesgo con IA.",
+      en: "Chilean collective financing platform that enables online investment in fixed real estate returns through blockchain-tokenized assets. Responsible for the public landing, marketplace, and investor dashboard with real-time portfolio monitoring, KYC, digital signing, and AI-powered risk scoring.",
     },
     technologies: [
-      "Vue.js",
-      "TailwindCSS",
-      "Pinia",
-      "Anilist API",
-      "Supabase",
-      "Vite",
+      "Meteor.js",
+      "Python",
+      "Gatsby",
+      "Tailwind CSS",
+      "MongoDB",
+      "Blockchain",
+      "AI",
     ],
-    url: "https://liz-beth.vercel.app/",
+    url: "https://tokenit.cl",
+  },
+  {
+    name: "Thender",
+    image: "/projects/thender.png",
+    category: "Social Platform",
+    description: {
+      es: "Una plataforma de citas y comunidades de vanguardia diseñada para que grupos específicos se conecten, compartan y crezcan juntos. Construida con capacidades en tiempo real, autenticación segura y una experiencia de usuario fluida centrada en conexiones significativas.",
+      en: "A cutting-edge dating and community platform designed for niche groups to connect, share, and grow together. Built with real-time capabilities, secure authentication, and a sleek user experience focusing on meaningful connections.",
+    },
+    technologies: ["Next.js", "Convex", "Clerk", "Tailwind CSS", "TypeScript"],
+    url: "https://thender.vercel.app/",
   },
   {
     name: "Zatobox",
@@ -51,6 +63,45 @@ const featuredProjects = [
     url: "https://www.zatobox.io/",
   },
   {
+    name: "Liz",
+    image: "/projects/liz.png",
+    category: "Landing Page",
+    description: {
+      es: "Liz es una aplicación web moderna y responsive diseñada para entusiastas del anime y manga. Permite descubrir contenido en tendencia, buscar con filtros avanzados, trackear el progreso de visualización/lectura y gestionar listas personalizadas. Construida con Vue 3, Supabase y la API de AniList.",
+      en: "Liz is a modern, responsive web application designed for anime and manga enthusiasts. It allows users to discover trending content, search with advanced filters, track their watching/reading progress, and manage custom lists. Built with Vue 3, Supabase, and the AniList API.",
+    },
+    technologies: [
+      "Vue.js",
+      "TailwindCSS",
+      "Pinia",
+      "Anilist API",
+      "Supabase",
+      "Vite",
+    ],
+    url: "https://liz-beth.vercel.app/",
+  },
+];
+
+const moreProjects = [
+  {
+    name: "Las Taurinas",
+    image: "/projects/lastaurinas.png",
+    category: "E-commerce",
+    description: {
+      es: "Las Taurinas es un e-commerce moderno construido en Empretienda, con integración de envíos Andreani, estilos CSS3 personalizados, y pagos seguros mediante Mercado Pago y transferencias bancarias. Enfocado en brindar una experiencia UX/UI fluida con un diseño totalmente responsivo.",
+      en: "Las Taurinas is a modern e-commerce built on Empretienda, featuring Andreani shipping integration, custom CSS3 styling, and secure payments via Mercado Pago and bank transfers. Focused on providing a seamless UX/UI experience with a fully responsive design.",
+    },
+    technologies: [
+      "Empretienda",
+      "Andreani",
+      "CSS3",
+      "Mercado Pago",
+      "UX/UI",
+      "Responsive Design",
+    ],
+    url: "https://lastaurinas.empretienda.com.ar/",
+  },
+  {
     name: "Consentido Cognitivo",
     image: "/projects/consentido.png",
     category: "Web Platform",
@@ -62,65 +113,15 @@ const featuredProjects = [
     technologies: ["UX Design", "Neurocognitive Stimulation", "Active Aging"],
   },
   {
-    name: "Zynee",
-    image: "/projects/zynee.png",
-    category: "Web App",
+    name: "Dot Studio",
+    image: "/projects/dot-studio.png",
+    category: "Agency",
     description: {
-      es: "Zynee es una Progressive Web App (PWA) enfocada en gestión financiera personal. Permite registrar y categorizar gastos, crear alcancías con objetivos específicos y ver reportes dinámicos. Incluye un módulo para organizaciones donde un líder puede registrar miembros, gestionar pagos y mantener un historial completo de transacciones internas.",
-      en: "Zynee is a Progressive Web App (PWA) focused on personal financial management. It enables users to log and categorize expenses, create savings jars with specific goals, and view dynamic reports. It also includes a module for organizations, where a leader can register members, manage payments, and maintain a complete history of internal transactions.",
+      es: "En Dot Studio, no solo construimos sitios web; creamos ecosistemas digitales que impulsan el crecimiento. Nos especializamos en transformar ideas complejas en experiencias web fluidas, responsivas y de alta conversión.",
+      en: "At Dot Studio, we don't just build websites; we create digital ecosystems that drive growth. We specialize in transforming complex ideas into seamless, responsive, and high-converting web experiences.",
     },
-    technologies: [
-      "TailwindCSS",
-      "Next.js",
-      "Supabase",
-      "React.js",
-      "Chart.js",
-      "Zustand",
-      "TypeScript",
-    ],
-    url: "https://zynee.vercel.app/",
-  },
-];
-
-const moreProjects = [
-  {
-    name: "Zzyn",
-    image: "/projects/zzyn.png",
-    category: "Website",
-    description: {
-      es: "Landing page estática para entusiastas del anime. Sirve como portfolio de tus series y películas favoritas, mostrando una selección curada de contenido desde clásicos hasta títulos modernos. Desarrollada con Nuxt.js para rendimiento rápido y optimización SEO, con Tailwind CSS para un diseño limpio, moderno y responsive.",
-      en: "Static landing page for anime enthusiasts. It serves as a portfolio of your favorite series and movies, showcasing a carefully curated selection of content, from classics to modern titles. Developed with Nuxt.js for fast performance and SEO optimization, and with Tailwind CSS for a clean, modern, and responsive design.",
-    },
-    technologies: ["Nuxt.js", "TailwindCSS", "Vue.js", "CSS", "pnpm"],
-    url: "https://zzyn.vercel.app/",
-  },
-  {
-    name: "Zynner Solutions",
-    image: "/projects/zynner-solutions.png",
-    category: "Corporate",
-    description: {
-      es: "Portfolio minimalista corporativo para mostrar servicios y proyectos de manera elegante y profesional.",
-      en: "Minimalist corporate portfolio to showcase services and projects in an elegant and professional way.",
-    },
-    technologies: ["Astro.js", "TailwindCSS"],
-    url: "https://zynner-portfolio.vercel.app/",
-  },
-  {
-    name: "Portfolio",
-    image: "/projects/portfolio.png",
-    category: "Personal",
-    description: {
-      es: "Mi nuevo portfolio personal, mostrando mis últimos proyectos y trabajos. Construido con Astro para crear una experiencia de usuario rápida y optimizada, demostrando mis habilidades en desarrollo web y diseño.",
-      en: "My new personal portfolio, showcasing my latest projects and work. Built with Astro to create a fast and optimized user experience while demonstrating my web development and design skills.",
-    },
-    url: "https://frysccou.dev",
-    technologies: [
-      "Astro.js",
-      "TypeScript",
-      "Vercel",
-      "TailwindCSS",
-      "UX/UI Design",
-    ],
+    technologies: ["Next.js", "UI/UX", "SEO", "E-commerce"],
+    url: "https://dot-studio.site",
   },
   {
     name: "Gym Master",
@@ -140,42 +141,6 @@ const moreProjects = [
       "Zustand",
     ],
     url: "https://gym-master-new.vercel.app/",
-  },
-  {
-    name: "XView",
-    image: "/projects/xview.jpg",
-    category: "App",
-    description: {
-      es: "XView es una plataforma de gestión y compra de manga diseñada para ofrecer una experiencia inmersiva y visualmente atractiva. Cuenta con interfaz moderna con gradientes animados y efecto glassmorphism, catálogo de productos funcional, carrito de compras integrado, sistema de autenticación con Supabase y diseño responsive con animaciones fluidas.",
-      en: "XView is a manga management and purchasing platform designed to provide an immersive, visually appealing experience. Features a modern interface with animated gradients and glassmorphism effect, fully functional product catalog, integrated shopping cart, authentication system with Supabase, and responsive design with fluid animations.",
-    },
-    url: "https://xview.vercel.app/",
-    technologies: [
-      "Next.js",
-      "React.js",
-      "TailwindCSS",
-      "Framer Motion",
-      "Supabase",
-      "PostgreSQL",
-    ],
-  },
-  {
-    name: "Bycarket",
-    image: "/projects/bycarket.jpg",
-    category: "Marketplace",
-    description: {
-      es: "Como parte de un proyecto en equipo, desarrollamos una plataforma web para compra y venta de vehículos que combina diseño moderno, inteligencia artificial y un robusto full-stack. Me enfoqué en toda la lógica de integración frontend-backend, implementé la lógica de pagos con Stripe e integré funcionalidades de IA.",
-      en: "As part of a team project, we developed a web platform for buying and selling vehicles that combines modern design, artificial intelligence, and a robust full-stack. I focused on the entire integration logic between the frontend and backend, implemented payment logic with Stripe, and integrated AI functionalities.",
-    },
-    url: "https://bycarket-front-main.vercel.app/home",
-    technologies: [
-      "NextJS",
-      "NestJS",
-      "TypeScript",
-      "TailwindCSS",
-      "Stripe",
-      "AI",
-    ],
   },
 ];
 

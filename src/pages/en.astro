@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HomeContent from "../components/HomeContent.astro";
+import { translations } from "../i18n/translations";
+
+const lang = "en";
+const t = translations[lang];
+
+const title = "Dot Studio | Professional Web Development";
+const description = "We transform ideas into digital experiences. We create custom landing pages, websites and e-commerce that drive your business.";
+---
+
+<Layout title={title} description={description} lang={lang}>
+  <HomeContent t={t} lang={lang} />
+</Layout>

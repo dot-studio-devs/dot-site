@@ -1,5 +1,5 @@
 ---
-import { ChevronDown, Users, GraduationCap } from "lucide-astro";
+import { Users, ChevronDown } from "lucide-astro";
 
 interface Props {
   lang: "es" | "en";
@@ -10,8 +10,8 @@ const { lang } = Astro.props;
 const title = lang === "es" ? "Sobre nosotros" : "About us";
 const subtitle =
   lang === "es"
-    ? "Conoce al equipo detrás de tus proyectos digitales"
-    : "Meet the team behind your digital projects";
+    ? "Conoce el estudio detrás de tus proyectos digitales"
+    : "Meet the studio behind your digital projects";
 
 const description =
   lang === "es"
@@ -20,7 +20,6 @@ const description =
 
 const techTitle =
   lang === "es" ? "Tecnologías que dominamos" : "Technologies we master";
-const eduTitle = lang === "es" ? "Formación académica" : "Academic background";
 
 const technologies = {
   core: {
@@ -91,53 +90,6 @@ const technologies = {
     ],
   },
 };
-
-const education =
-  lang === "es"
-    ? [
-        {
-          name: "Coderhouse",
-          program: "Carrera Full Stack Developer",
-          image: "/student/coderhouse.jpg",
-        },
-        {
-          name: "Henry",
-          program: "Full Stack Development Bootcamp",
-          image: "/student/henry.jpg",
-        },
-        {
-          name: "ISSD",
-          program: "Tecnicatura en Desarrollo Web y Apps Móviles",
-          image: "/student/issd.png",
-        },
-        {
-          name: "Código Facilito",
-          program: "Bootcamp Frontend Moderno",
-          image: "/student/codigo-facilito.png",
-        },
-      ]
-    : [
-        {
-          name: "Coderhouse",
-          program: "Full Stack Developer Career",
-          image: "/student/coderhouse.jpg",
-        },
-        {
-          name: "Henry",
-          program: "Full Stack Development Bootcamp",
-          image: "/student/henry.jpg",
-        },
-        {
-          name: "ISSD",
-          program: "Web & Mobile Development Degree",
-          image: "/student/issd.png",
-        },
-        {
-          name: "Código Facilito",
-          program: "Modern Frontend Bootcamp",
-          image: "/student/codigo-facilito.png",
-        },
-      ];
 ---
 
 <section id="about" class="about">
@@ -153,50 +105,25 @@ const education =
       </div>
 
       <div class="tech-section" data-animate data-delay="200">
-        <button class="tech-toggle" id="tech-toggle">
-          <span class="tech-toggle-text">{techTitle}</span>
-          <ChevronDown size={20} strokeWidth={2} class="toggle-icon" />
-        </button>
-
-        <div class="tech-content" id="tech-content">
-          {
-            Object.values(technologies).map((category) => (
-              <div class="tech-category">
-                <h4 class="tech-category-title">{category.title}</h4>
-                <div class="tech-grid">
-                  {category.items.map((tech) => (
-                    <div class="tech-item">
-                      <img
-                        src={`https://skillicons.dev/icons?i=${tech.icon}`}
-                        alt={tech.name}
-                        width="40"
-                        height="40"
-                        loading="lazy"
-                      />
-                      <span class="tech-name">{tech.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-
-        <div class="education-section">
-          <div class="education-header">
-            <GraduationCap size={20} strokeWidth={1.5} />
-            <h3 class="education-title">{eduTitle}</h3>
-          </div>
-          <div class="education-grid">
+        <div class="tech-card">
+          <h3 class="tech-title">{techTitle}</h3>
+          <div class="tech-content">
             {
-              education.map((edu) => (
-                <div class="education-item">
-                  <div class="education-logo">
-                    <img src={edu.image} alt={edu.name} loading="lazy" />
-                  </div>
-                  <div class="education-info">
-                    <span class="education-name">{edu.name}</span>
-                    <span class="education-program">{edu.program}</span>
+              Object.values(technologies).map((category) => (
+                <div class="tech-category">
+                  <h4 class="tech-category-title">{category.title}</h4>
+                  <div class="tech-grid">
+                    {category.items.map((tech) => (
+                      <div class="tech-item" title={tech.name}>
+                        <img
+                          src={`https://skillicons.dev/icons?i=${tech.icon}`}
+                          alt={tech.name}
+                          width="32"
+                          height="32"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))
@@ -210,29 +137,45 @@ const education =
 
 <style>
   .about {
-    padding: 7rem 2rem;
-    background: #fafafa;
-    overflow-x: hidden;
+    padding: 8rem 2rem;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-dot-green-500-rgb), 0.03),
+      transparent
+    );
+    z-index: 0;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
   }
 
   .about-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    gap: 6rem;
+    align-items: center;
   }
 
   .about-content {
     opacity: 0;
     transform: translateX(-30px);
-    transition: all 0.7s ease;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .about-content.visible {
@@ -241,48 +184,45 @@ const education =
   }
 
   .about-icon {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      135deg,
-      var(--color-dot-purple-100),
-      var(--color-dot-purple-50)
-    );
-    border-radius: 14px;
-    color: var(--color-dot-purple-700);
-    margin-bottom: 1.5rem;
+    background: #111;
+    border-radius: 18px;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
   .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
 
   .section-subtitle {
-    font-size: 1.1rem;
-    color: var(--color-dot-shadow);
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: 500;
   }
 
   .about-description {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--color-dot-shadow);
+    color: #444;
+    max-width: 540px;
   }
 
   .tech-section {
     opacity: 0;
     transform: translateX(30px);
-    transition: all 0.7s ease;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .tech-section.visible {
@@ -290,258 +230,107 @@ const education =
     transform: translateX(0);
   }
 
-  .tech-toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 1.5rem;
+  .tech-card {
     background: white;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
   }
 
-  .tech-toggle:hover {
-    border-color: var(--color-dot-green-500);
-  }
-
-  .tech-toggle.active {
-    border-radius: 16px 16px 0 0;
-    border-bottom: none;
-  }
-
-  .tech-toggle-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-
-  .toggle-icon {
-    color: var(--color-dot-shadow);
-    transition: transform 0.3s ease;
-  }
-
-  .tech-toggle.active .toggle-icon {
-    transform: rotate(180deg);
-  }
-
-  .tech-content {
-    max-height: 0;
-    overflow: hidden;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    transition: max-height 0.4s ease;
-  }
-
-  .tech-content.expanded {
-    max-height: 1500px;
-  }
-
-  .tech-content > div {
-    padding: 1.5rem;
-    box-sizing: border-box;
+  .tech-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
   }
 
   .tech-category {
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
   }
 
   .tech-category:last-child {
     margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
   }
 
   .tech-category-title {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-dot-shadow);
+    color: #999;
     margin-bottom: 1rem;
   }
 
   .tech-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
   .tech-item {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    background: #fafafa;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    justify-content: center;
+    background: #f8f8f8;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .tech-item:hover {
-    background: var(--color-dot-green-50);
-    transform: translateY(-2px);
+    background: #111;
+    transform: translateY(-5px) scale(1.1);
   }
 
   .tech-item img {
     width: 24px;
     height: 24px;
-    border-radius: 4px;
+    filter: grayscale(1);
+    transition: all 0.3s ease;
   }
 
-  .tech-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #1a1a1a;
+  .tech-item:hover img {
+    filter: grayscale(0);
   }
 
-  .education-section {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-  }
-
-  .education-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-    color: var(--color-dot-purple-700);
-  }
-
-  .education-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-
-  .education-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .education-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    background: #fafafa;
-    border-radius: 12px;
-    transition: all 0.2s ease;
-  }
-
-  .education-item:hover {
-    background: var(--color-dot-purple-50);
-    transform: translateY(-2px);
-  }
-
-  .education-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: white;
-  }
-
-  .education-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .education-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    min-width: 0;
-  }
-
-  .education-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-
-  .education-program {
-    font-size: 0.75rem;
-    color: var(--color-dot-shadow);
-    line-height: 1.4;
+  @media (max-width: 1024px) {
+    .about-layout {
+      gap: 3rem;
+    }
   }
 
   @media (max-width: 900px) {
     .about-layout {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 4rem;
+    }
+
+    .about-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .about-description {
+      max-width: 100%;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .about {
       padding: 5rem 1.5rem;
     }
 
     .section-title {
-      font-size: 2rem;
+      font-size: 2.25rem;
     }
 
-    .education-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .tech-toggle {
-      padding: 1rem;
-    }
-
-    .tech-content > div {
-      padding: 1rem;
-    }
-
-    .education-section {
-      padding: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .about {
-      padding: 4rem 1rem;
-    }
-
-    .section-title {
-      font-size: 1.75rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
-    }
-
-    .tech-grid {
-      gap: 0.5rem;
-    }
-
-    .tech-item {
-      padding: 0.4rem 0.6rem;
-    }
-
-    .tech-name {
-      font-size: 0.8rem;
-    }
-
-    .education-item {
-      padding: 0.6rem;
-    }
-
-    .education-program {
-      font-size: 0.7rem;
+    .tech-card {
+      padding: 1.5rem;
     }
   }
 </style>
@@ -571,12 +360,4 @@ const education =
   );
 
   animateElements.forEach((el) => observer.observe(el));
-
-  const techToggle = document.getElementById("tech-toggle");
-  const techContent = document.getElementById("tech-content");
-
-  techToggle?.addEventListener("click", () => {
-    techToggle.classList.toggle("active");
-    techContent?.classList.toggle("expanded");
-  });
 </script>

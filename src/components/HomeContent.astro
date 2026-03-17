@@ -1,0 +1,40 @@
+---
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Stats from "./Stats.astro";
+import Testimonials from "./Testimonials.astro";
+import Services from "./Services.astro";
+import About from "./About.astro";
+import Features from "./Features.astro";
+import Projects from "./Projects.astro";
+import CallToAction from "./CallToAction.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PrivacyModal from "./PrivacyModal.astro";
+import TermsModal from "./TermsModal.astro";
+import CustomCursor from "./CustomCursor.astro";
+import type { Translations } from "../i18n/translations";
+
+interface Props {
+  t: Translations;
+  lang: "es" | "en";
+}
+
+const { t, lang } = Astro.props;
+---
+
+<Header t={t} lang={lang} />
+<main>
+  <Hero t={t} />
+  <Stats t={t} lang={lang} />
+  <Testimonials lang={lang} />
+  <Services t={t} />
+  <About lang={lang} />
+  <Projects t={t} lang={lang} />
+  <CallToAction t={t} lang={lang} />
+  <Contact t={t} />
+</main>
+<Footer t={t} lang={lang} />
+<PrivacyModal lang={lang} />
+<TermsModal lang={lang} />
+<CustomCursor />
